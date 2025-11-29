@@ -19,7 +19,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({
     { label: "Home", href: "/" },
     { label: "Features", href: "/features" },
     { label: "About", href: "/about" },
-    { label: "Contact us", href: "#contact" },
+    { label: "Contact us", href: "/contact" },
   ],
   className = "hidden md:flex items-center",
   spacingClass = "space-x-25",
