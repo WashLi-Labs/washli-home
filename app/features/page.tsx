@@ -26,7 +26,7 @@ export default function FeaturesPage() {
 
           <NavLinks />
 
-          <Button className="bg-white text-gray-900 hover:bg-gray-50 font-semibold px-6 shadow-lg">
+          <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] !rounded-[25px]">
             Get Now
           </Button>
         </nav>

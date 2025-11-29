@@ -30,7 +30,7 @@ export default function Home() {
 
           <div className="relative">
             <div className="absolute inset-0 -z-10 blur-2xl rounded-full scale-125 bg-sky-200/50" />
-            <Button className="bg-sky-100 text-black font-semibold px-6 py-2 rounded-full shadow-sm hover:bg-sky-200 transition-colors">
+            <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] !rounded-[25px]">
               Get Now
             </Button>
           </div>
