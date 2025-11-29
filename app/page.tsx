@@ -21,16 +21,19 @@ export default function Home() {
       <div className="relative z-10">
         <nav className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <h1 className="text-3xl font-bold">
+            <a href="/" className="text-3xl font-bold">
               Wash<span className="text-sky-500">L</span>i
-            </h1>
+            </a>
           </div>
 
           <NavLinks />
 
-          <Button className="bg-white text-gray-900 hover:bg-gray-50 font-semibold px-6 shadow-lg">
-            Get Now
-          </Button>
+          <div className="relative">
+            <div className="absolute inset-0 -z-10 blur-2xl rounded-full scale-125 bg-sky-200/50" />
+            <Button className="bg-sky-100 text-black font-semibold px-6 py-2 rounded-full shadow-sm hover:bg-sky-200 transition-colors">
+              Get Now
+            </Button>
+          </div>
         </nav>
 
         <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">

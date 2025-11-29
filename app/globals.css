@@ -98,3 +98,12 @@
 }
 
 /* Base styles moved into layout to avoid @apply issues */
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
