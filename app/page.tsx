@@ -30,7 +30,7 @@ export default function Home() {
 
           <div className="relative">
             <div className="absolute inset-0 -z-10 blur-2xl rounded-full scale-125 bg-sky-200/50" />
-            <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] !rounded-[25px]">
+            <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
               Get Now
             </Button>
           </div>
@@ -54,14 +54,14 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4">
                 {/* Google Play Button */}
-                <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] !rounded-[25px]">
+                <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
                   <span className="flex items-center text-black font-bold hover:text-black">
                     Download Now <FaGooglePlay className="ml-5 h-5 w-5" />
                   </span>
                 </Button>
 
                 {/* Apple App Store Button */}
-                <Button className="bg-black hover:bg-gray-900 font-bold text-white font-bold px-4 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] !rounded-[25px]">
+                <Button className="bg-black hover:bg-gray-900 text-white font-bold px-4 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
                   <span className="flex items-center">
                     Download Now <FaAppStore className="ml-5 h-5 w-5" />
                   </span>
