@@ -28,12 +28,8 @@ export default function Home() {
 
           <NavLinks />
 
-          <div className="relative">
-            <div className="absolute inset-0 -z-10 blur-2xl rounded-full scale-125 bg-sky-200/50" />
-            <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-              Get Now
-            </Button>
-          </div>
+          {/* Spacer to preserve navbar alignment after removing the CTA */}
+          <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
         </nav>
 
         <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
@@ -70,7 +66,7 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="relative w-full max-w-2xl mx-auto">
+              <div className="relative w-full max-w-2xl mx-auto md:translate-x-4 lg:translate-x-18">
                 <Image
                   src="/iphone.png"
                   alt="WashLi App Interface"

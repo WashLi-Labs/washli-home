@@ -107,7 +107,7 @@ export default function FeatureScroller() {
             data-card
             className="shrink-0 group relative flex flex-col snap-center gap-4 w-72 md:w-auto md:basis-1/3 lg:basis-1/4 h-96 md:h-112 lg:h-110 p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/30 shadow-xl shadow-sky-500/10 ring-1 ring-sky-400/40 hover:ring-sky-400 transition duration-300"
           >
-            <h3 className="text-lg text-gray-1000 text-center pt-1">
+            <h3 className="text-lg font-semibold text-gray-1000 text-center pt-1">
               {f.title}
             </h3>
             <div className="flex-1 flex items-center justify-center">

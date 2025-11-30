@@ -63,19 +63,17 @@ export default function ContactPage() {
             </Link>
           </div>
           <NavLinks />
-          <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-            Get Now
-          </Button>
+          {/* Spacer to preserve navbar alignment after removing the CTA */}
+          <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
         </nav>
 
-        {/* Changed py-20 to py-12 to move everything up */}
-        <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
-          
+        {/* UPDATED: Changed py-12 md:py-16 to py-10 md:py-14 to match About Page exactly */}
+        <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
           {/* Main Grid: 2 Columns */}
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-            
+          <div className="grid md:grid-cols-2 gap-12 md:gap-40 items-start">
             {/* LEFT COLUMN: Text + Icons */}
-            <div className="flex flex-col h-full pt-2">
+            {/* UPDATED: Removed pt-2 here so it starts at the very top */}
+            <div className="flex flex-col h-full">
               <div className="mb-10">
                 <h1 className="text-2xl md:text-4xl font-bold tracking-tight mb-4 text-black">
                   Contact Us
@@ -107,7 +105,6 @@ export default function ContactPage() {
             </div>
 
             {/* RIGHT COLUMN: Form */}
-            {/* Removed negative margins so it aligns perfectly with the left column */}
             <div className="relative w-full">
               <div className="rounded-3xl bg-white/550 backdrop-blur-md border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-semibold mb-6">
@@ -233,7 +230,7 @@ function EmailIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.5" // Increased thickness
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -251,7 +248,7 @@ function PhoneIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.5" // Increased thickness
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -268,17 +265,13 @@ function OfficeIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.5" // Increased thickness
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      {/* Base line */}
       <path d="M3 21h18" />
-      {/* Tall building on left */}
       <path d="M6 21V7h8v14" />
-      {/* Shorter annex on right */}
       <path d="M14 14h4v7" />
-      {/* Windows (Dots/Lines) */}
       <path d="M10 11h.01" />
       <path d="M10 15h.01" />
       <path d="M10 18h.01" />

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import NavLinks from "@/components/nav-links";
 import { FiUsers } from "react-icons/fi";
 import { useRef, useCallback } from "react";
@@ -98,15 +98,13 @@ export default function AboutPage() {
           </div>
 
           <NavLinks />
-
-          <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-            Get Now
-          </Button>
+          {/* Spacer to preserve navbar alignment after removing the CTA */}
+          <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
         </nav>
 
         {/* Hero / About copy */}
         <section className="max-w-7xl mx-auto px-6 py-10 md:py-14">
-          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight">
             About Wash<span className="text-sky-500">L</span>i
           </h1>
           <p className="mt-6 max-w-3xl text-gray-800 text-lg leading-relaxed">
@@ -137,7 +135,7 @@ export default function AboutPage() {
               <article
                 key={t.name}
                 data-card
-                className="shrink-0 group relative flex flex-col snap-center gap-3 w-72 md:w-80 h-64 p-6 rounded-3xl bg-white/40 backdrop-blur-md border border-white/50 shadow-xl shadow-sky-500/10 ring-1 ring-sky-300/40 items-center text-center"
+                className="shrink-0 group relative flex flex-col snap-center gap-3 w-72 md:w-80 h-64 p-6 rounded-3xl bg-white/25 backdrop-blur-md border border-white/50 shadow-xl shadow-sky-500/10 ring-1 ring-sky-300/40 items-center text-center"
               >
                 <div className="w-20 h-20 rounded-full bg-sky-100 flex items-center justify-center ring-1 ring-sky-300/60">
                   <FiUsers className="text-sky-500" size={36} />

@@ -26,9 +26,8 @@ export default function FeaturesPage() {
 
           <NavLinks />
 
-          <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-4 py-3 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-            Get Now
-          </Button>
+          {/* Spacer to preserve navbar alignment after removing the CTA */}
+          <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
         </nav>
         <FeatureScroller />
       </div>
