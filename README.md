@@ -60,7 +60,7 @@ Make sure you have the following installed:
 
 ### Running the Development Server
 
-Start the development server:
+Start the development server: 
 
 ```bash
 npm run dev
