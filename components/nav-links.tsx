@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -19,6 +20,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({
     { label: "Home", href: "/" },
     { label: "Features", href: "/features" },
     { label: "About", href: "/about" },
+    { label: "Partners", href: "/partners" },
     { label: "Contact us", href: "/contact" },
   ],
   className = "hidden md:flex items-center",
