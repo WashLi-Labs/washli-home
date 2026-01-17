@@ -50,7 +50,7 @@ export default function SignUpPage() {
             <div className="relative z-10 flex flex-1 max-w-7xl w-full mx-auto md:px-8 py-8 h-full items-start">
                 <div className="bg-white/50 backdrop-blur-md border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-3xl flex flex-col md:flex-row w-full overflow-hidden min-h-[600px]">
                     {/* Sidebar */}
-                    <Sidebar currentStep={currentStep} />
+                    <Sidebar currentStep={currentStep} onStepClick={setCurrentStep} navigationEnabled={currentStep >= 6} />
 
                     {/* Main Content */}
                     <div className="flex-1 p-8 md:p-12 overflow-y-auto">
