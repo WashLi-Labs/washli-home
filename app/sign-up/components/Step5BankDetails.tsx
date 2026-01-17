@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, Upload } from "lucide-react";
+import { ArrowLeft, ArrowRight, Upload, ChevronDown } from "lucide-react";
 
 interface Step5Props {
     onNext: () => void;
@@ -28,23 +28,29 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev }) => {
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Bank Name*</label>
-                        <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600">
-                            <option value="" disabled selected>Select</option>
-                            <option>Bank of Ceylon</option>
-                            <option>Commercial Bank</option>
-                            <option>HNB</option>
-                            <option>Sampath Bank</option>
-                        </select>
+                        <div className="relative">
+                            <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none">
+                                <option value="" disabled selected>Select</option>
+                                <option>Bank of Ceylon</option>
+                                <option>Commercial Bank</option>
+                                <option>HNB</option>
+                                <option>Sampath Bank</option>
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                        </div>
                     </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Branch Name*</label>
-                        <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600">
-                            <option value="" disabled selected>Select</option>
-                            <option>Colombo</option>
-                            <option>Kandy</option>
-                            <option>Galle</option>
-                        </select>
+                        <div className="relative">
+                            <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none">
+                                <option value="" disabled selected>Select</option>
+                                <option>Colombo</option>
+                                <option>Kandy</option>
+                                <option>Galle</option>
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                        </div>
                     </div>
 
                     <div className="space-y-2 md:col-span-2">

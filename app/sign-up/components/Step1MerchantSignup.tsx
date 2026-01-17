@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Check, Info } from "lucide-react";
+import { Check, Info, Phone, MapPin, ArrowRight, ChevronDown } from "lucide-react";
 
 interface Step1Props {
     onNext: () => void;
@@ -30,7 +30,9 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                         />
                         {verified && (
                             <div className="flex items-center text-green-500 text-sm font-medium mt-1">
-                                <span className="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center mr-2 text-xs">✓</span>
+                                <span className="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center mr-2">
+                                    <Check size={12} strokeWidth={3} />
+                                </span>
                                 Email verified
                             </div>
                         )}
@@ -41,12 +43,15 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                 {/* How did you hear about us */}
                 <div className="space-y-2 pt-4">
                     <label className="block text-sm font-medium text-slate-700">How did you hear about us?*</label>
-                    <select className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
-                        <option value="" disabled selected>Select an option</option>
-                        <option>Social Media</option>
-                        <option>Friend</option>
-                        <option>Advertisement</option>
-                    </select>
+                    <div className="relative max-w-md">
+                        <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none">
+                            <option value="" disabled selected>Select an option</option>
+                            <option>Social Media</option>
+                            <option>Friend</option>
+                            <option>Advertisement</option>
+                        </select>
+                        <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                    </div>
                 </div>
 
                 {/* Radio Group */}
@@ -67,24 +72,30 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Region*</label>
-                        <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
-                            <option value="" disabled selected>Select Region</option>
-                            <option>Embilipitiya</option>
-                            <option>Colombo</option>
-                            <option>Kandy</option>
-                        </select>
+                        <div className="relative">
+                            <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none">
+                                <option value="" disabled selected>Select Region</option>
+                                <option>Embilipitiya</option>
+                                <option>Colombo</option>
+                                <option>Kandy</option>
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                        </div>
                     </div>
                     {/* Empty col for spacing or matching styles if needed, but design has fields side by side below */}
                     <div className="hidden md:block"></div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Merchant Type*</label>
-                        <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400">
-                            <option value="" disabled selected>Select Merchant Type</option>
-                            <option>Dining Restaurant</option>
-                            <option>Cafe</option>
-                            <option>Supermarket</option>
-                        </select>
+                        <div className="relative">
+                            <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none">
+                                <option value="" disabled selected>Select Merchant Type</option>
+                                <option>Dining Restaurant</option>
+                                <option>Cafe</option>
+                                <option>Supermarket</option>
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                        </div>
                     </div>
 
                     <div className="space-y-2">
@@ -107,7 +118,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                         <div className="relative">
                             <input type="text" placeholder="Enter Phone Number" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
                             {/* Placeholder icon */}
-                            <div className="absolute left-3 top-3.5 text-slate-400">📞</div>
+                            <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                         </div>
                     </div>
 
@@ -116,7 +127,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                         <div className="flex space-x-4">
                             <div className="relative flex-1">
                                 <input type="text" placeholder="Lat, Long" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
-                                <div className="absolute left-3 top-3.5 text-slate-400">📍</div>
+                                <MapPin className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
                             <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-semibold rounded-lg text-sm transition-colors whitespace-nowrap text-white">
                                 Pick Location
@@ -134,7 +145,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext }) => {
                         className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md flex items-center"
                     >
                         Signup and Continue
-                        <span className="ml-2">→</span>
+                        <ArrowRight size={20} className="ml-2" />
                     </button>
                 </div>
             </form>

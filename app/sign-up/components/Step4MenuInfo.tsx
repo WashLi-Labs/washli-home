@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, Download, HelpCircle, Upload } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, HelpCircle, Upload, ChevronDown } from "lucide-react";
 
 interface Step4Props {
     onNext: () => void;
@@ -74,14 +74,17 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev }) => {
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Do you have images you can provide?*</label>
-                        <select
-                            value={hasImages}
-                            onChange={(e) => setHasImages(e.target.value)}
-                            className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600"
-                        >
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        </select>
+                        <div className="relative max-w-md">
+                            <select
+                                value={hasImages}
+                                onChange={(e) => setHasImages(e.target.value)}
+                                className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none"
+                            >
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                            <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                        </div>
                     </div>
 
                     {hasImages === "Yes" && (
