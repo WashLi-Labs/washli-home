@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { ArrowLeft, ArrowRight, Upload } from "lucide-react";
+import React from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { SignUpFormData } from "../types";
+import { FileUploadInput } from "./FileUploadInput";
 
 interface Step3Props {
     onNext: () => void;
     onPrev: () => void;
+    data: SignUpFormData;
+    updateData: (updates: Partial<SignUpFormData>) => void;
 }
 
-export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
-    const [businessRegistered, setBusinessRegistered] = useState(false);
-    const [taxRegistered, setTaxRegistered] = useState(false);
-    const [vatRegistered, setVatRegistered] = useState(false);
-
+export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, updateData }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -39,15 +39,15 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
-                                    onClick={() => setBusinessRegistered(true)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ businessRegistered: true })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setBusinessRegistered(false)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ businessRegistered: false })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -55,33 +55,39 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                         </div>
                     </div>
 
-                    {businessRegistered && (
+                    {data.businessRegistered && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Parent name as per BR*</label>
-                                <input type="text" placeholder="Parent name as per BR" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.parentName}
+                                    onChange={(e) => updateData({ parentName: e.target.value })}
+                                    placeholder="Parent name as per BR" 
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">BR Number*</label>
-                                <input type="text" placeholder="BR Number" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.brNumber}
+                                    onChange={(e) => updateData({ brNumber: e.target.value })}
+                                    placeholder="BR Number" 
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
 
                             <div className="space-y-2 md:col-span-2">
                                 <label className="block text-sm text-slate-600 flex items-center">
                                     BR Document* <span className="ml-1 text-slate-400 text-xs">(Pdf, Jpg, Png)</span>
                                 </label>
-                                <div className="flex rounded-lg overflow-hidden border border-slate-200 max-w-md">
-                                    <input
-                                        type="text"
-                                        placeholder="No file chosen"
-                                        readOnly
-                                        className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
+                                <div className="max-w-md">
+                                    <FileUploadInput
+                                        value={data.brDocument}
+                                        onFileSelect={(fileName) => updateData({ brDocument: fileName })}
                                     />
-                                    <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                        <Upload size={16} className="mr-2" />
-                                        Upload
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -95,15 +101,15 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
-                                    onClick={() => setTaxRegistered(true)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ taxRegistered: true })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setTaxRegistered(false)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ taxRegistered: false })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -111,47 +117,37 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                         </div>
                     </div>
 
-                    {taxRegistered && (
+                    {data.taxRegistered && (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Tin Number*</label>
-                                <input type="text" placeholder="Tin Number" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.tinNumber}
+                                    onChange={(e) => updateData({ tinNumber: e.target.value })}
+                                    placeholder="Tin Number" 
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm text-slate-600 flex items-center">
                                     Tax Certificate* <span className="ml-1 text-slate-400 text-xs">(Pdf)</span>
                                 </label>
-                                <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                                    <input
-                                        type="text"
-                                        placeholder="No file chosen"
-                                        readOnly
-                                        className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                                    />
-                                    <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                        <Upload size={16} className="mr-2" />
-                                        Upload
-                                    </button>
-                                </div>
+                                <FileUploadInput
+                                    value={data.taxCertificate}
+                                    onFileSelect={(fileName) => updateData({ taxCertificate: fileName })}
+                                />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm text-slate-600 flex items-center">
                                     TDL <span className="ml-1 text-slate-400 text-xs">(Pdf, Jpg, Png)</span>
                                 </label>
-                                <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                                    <input
-                                        type="text"
-                                        placeholder="No file chosen"
-                                        readOnly
-                                        className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                                    />
-                                    <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                        <Upload size={16} className="mr-2" />
-                                        Upload
-                                    </button>
-                                </div>
+                                <FileUploadInput
+                                    value={data.tdlDocument}
+                                    onFileSelect={(fileName) => updateData({ tdlDocument: fileName })}
+                                />
                             </div>
                         </div>
                     )}
@@ -164,15 +160,15 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
-                                    onClick={() => setVatRegistered(true)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ vatRegistered: true })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setVatRegistered(false)}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    onClick={() => updateData({ vatRegistered: false })}
+                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -180,11 +176,17 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                         </div>
                     </div>
 
-                    {vatRegistered && (
+                    {data.vatRegistered && (
                         <div className="pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">VAT Number*</label>
-                                <input type="text" placeholder="VAT Number" className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.vatNumber}
+                                    onChange={(e) => updateData({ vatNumber: e.target.value })}
+                                    placeholder="VAT Number" 
+                                    className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
                         </div>
                     )}
@@ -199,35 +201,19 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev }) => {
                                 {/* Front Upload */}
                                 <div className="space-y-2">
                                     <label className="block text-sm text-slate-600">Front*</label>
-                                    <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                                        <input
-                                            type="text"
-                                            placeholder="File selected"
-                                            readOnly
-                                            className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                                        />
-                                        <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                            <Upload size={16} className="mr-2" />
-                                            Upload
-                                        </button>
-                                    </div>
+                                    <FileUploadInput
+                                        value={data.nicFront}
+                                        onFileSelect={(fileName) => updateData({ nicFront: fileName })}
+                                    />
                                 </div>
 
                                 {/* Back Upload */}
                                 <div className="space-y-2">
                                     <label className="block text-sm text-slate-600">Back*</label>
-                                    <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                                        <input
-                                            type="text"
-                                            placeholder="File selected"
-                                            readOnly
-                                            className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                                        />
-                                        <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                            <Upload size={16} className="mr-2" />
-                                            Upload
-                                        </button>
-                                    </div>
+                                    <FileUploadInput
+                                        value={data.nicBack}
+                                        onFileSelect={(fileName) => updateData({ nicBack: fileName })}
+                                    />
                                 </div>
                             </div>
                         </div>

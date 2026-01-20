@@ -1,14 +1,16 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, Download, HelpCircle, Upload, ChevronDown } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, HelpCircle, ChevronDown } from "lucide-react";
+import { SignUpFormData } from "../types";
+import { FileUploadInput } from "./FileUploadInput";
 
 interface Step4Props {
     onNext: () => void;
     onPrev: () => void;
+    data: SignUpFormData;
+    updateData: (updates: Partial<SignUpFormData>) => void;
 }
 
-export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev }) => {
-    const [hasImages, setHasImages] = React.useState("No");
-
+export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, updateData }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -35,36 +37,20 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev }) => {
                         <label className="block text-sm text-slate-600 flex items-center">
                             Menu* <HelpCircle size={14} className="ml-1 text-slate-400" />
                         </label>
-                        <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                            <input
-                                type="text"
-                                placeholder="File selected"
-                                readOnly
-                                className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                            />
-                            <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                <Upload size={16} className="mr-2" />
-                                Upload
-                            </button>
-                        </div>
+                        <FileUploadInput
+                            value={data.menuDocument}
+                            onFileSelect={(fileName) => updateData({ menuDocument: fileName })}
+                        />
                     </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm text-slate-600 flex items-center">
                             Outlet Logo* <HelpCircle size={14} className="ml-1 text-slate-400" />
                         </label>
-                        <div className="flex rounded-lg overflow-hidden border border-slate-200">
-                            <input
-                                type="text"
-                                placeholder="File selected"
-                                readOnly
-                                className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
-                            />
-                            <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                <Upload size={16} className="mr-2" />
-                                Upload
-                            </button>
-                        </div>
+                        <FileUploadInput
+                            value={data.outletLogo}
+                            onFileSelect={(fileName) => updateData({ outletLogo: fileName })}
+                        />
                     </div>
                 </div>
 
@@ -76,8 +62,8 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev }) => {
                         <label className="block text-sm font-medium text-slate-700">Do you have images you can provide?*</label>
                         <div className="relative max-w-md">
                             <select
-                                value={hasImages}
-                                onChange={(e) => setHasImages(e.target.value)}
+                                value={data.hasImages}
+                                onChange={(e) => updateData({ hasImages: e.target.value })}
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none"
                             >
                                 <option value="No">No</option>
@@ -87,23 +73,17 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev }) => {
                         </div>
                     </div>
 
-                    {hasImages === "Yes" && (
+                    {data.hasImages === "Yes" && (
                         <div className="space-y-2 animate-fade-in-up">
                             <label className="block text-sm text-slate-600 flex items-center">
                                 Upload Images* <HelpCircle size={14} className="ml-1 text-slate-400" />
                             </label>
-                            <div className="flex rounded-lg overflow-hidden border border-slate-200 max-w-md">
-                                <input
-                                    type="text"
-                                    placeholder="No file chosen"
-                                    readOnly
-                                    className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
+                             <div className="max-w-md">
+                                <FileUploadInput
+                                    value={data.itemImages}
+                                    onFileSelect={(fileName) => updateData({ itemImages: fileName })}
                                 />
-                                <button type="button" className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors">
-                                    <Upload size={16} className="mr-2" />
-                                    Upload
-                                </button>
-                            </div>
+                             </div>
                         </div>
                     )}
 

@@ -1,12 +1,19 @@
 import React from "react";
 import { ArrowLeft, Edit2 } from "lucide-react";
+import { SignUpFormData, OperatingHour } from "../types";
 
 interface Step6Props {
     onPrev: () => void;
     onSubmit: () => void;
+    data: SignUpFormData;
+    onGoToStep?: (step: number) => void;
 }
 
-export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
+export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onGoToStep }) => {
+    
+    const formatTime = (time: string) => time || "N/A";
+    const formatBool = (val: boolean) => val ? "Yes" : "No";
+
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -21,15 +28,15 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">How did you hear about us?</p>
-                            <p className="font-medium text-slate-800">Walk-in</p>
+                            <p className="font-medium text-slate-800">{data.howDidYouHear || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Email</p>
-                            <p className="font-medium text-slate-800">vg.pandula@gmail.com</p>
+                            <p className="font-medium text-slate-800">{data.email || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Main Outlet or Branch Outlet?</p>
-                            <p className="font-medium text-slate-800">Main Outlet</p>
+                            <p className="font-medium text-slate-800">Main Outlet</p> {/* Hardcoded as not in form? */}
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Merchant Id</p>
@@ -37,31 +44,33 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Region</p>
-                            <p className="font-medium text-slate-800">Colombo</p>
+                            <p className="font-medium text-slate-800">{data.region || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Merchant Type</p>
-                            <p className="font-medium text-slate-800">Enterprise</p>
+                            <p className="font-medium text-slate-800">{data.merchantType || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Name</p>
-                            <p className="font-medium text-slate-800">kkk</p>
+                            <p className="font-medium text-slate-800">{data.outletName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Address</p>
-                            <p className="font-medium text-slate-800">No 137, Rajagiriya Rd,</p>
+                            <p className="font-medium text-slate-800">{data.outletAddress || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Phone Number</p>
-                            <p className="font-medium text-slate-800">0715878774</p>
+                            <p className="font-medium text-slate-800">{data.phoneNumber || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">City</p>
-                            <p className="font-medium text-slate-800">Embilipitiya</p>
+                            <p className="font-medium text-slate-800">{data.city || "N/A"}</p>
                         </div>
                         <div className="md:col-span-2">
                             <p className="text-slate-500 mb-1">Pin</p>
-                            <p className="font-medium text-slate-800">6.911872530707622, 79.89729023890938</p>
+                            <p className="font-medium text-slate-800">
+                                {data.location ? `${data.location.lat.toFixed(6)}, ${data.location.lng.toFixed(6)}` : "N/A"}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +79,11 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 relative">
                     <div className="flex justify-between items-start mb-4">
                         <h3 className="font-semibold text-slate-800">Contact Information</h3>
-                        <button className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium">
+                        <button 
+                             type="button"
+                             onClick={() => onGoToStep?.(2)}
+                             className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium"
+                        >
                             Edit <Edit2 size={12} className="ml-1" />
                         </button>
                     </div>
@@ -78,75 +91,45 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">Owner Name*</p>
-                            <p className="font-medium text-slate-800">asasa</p>
+                            <p className="font-medium text-slate-800">{data.ownerName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Owner Email*</p>
-                            <p className="font-medium text-slate-800">vg.pandula@gmail.com</p>
+                            <p className="font-medium text-slate-800">{data.ownerEmail || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Owner Phone Number*</p>
-                            <p className="font-medium text-slate-800">0715878774</p>
+                            <p className="font-medium text-slate-800">{data.ownerPhone || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Manager Name*</p>
-                            <p className="font-medium text-slate-800">Pandu</p>
+                            <p className="font-medium text-slate-800">{data.managerName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Manager Phone Number*</p>
-                            <p className="font-medium text-slate-800">0715878774</p>
+                            <p className="font-medium text-slate-800">{data.managerPhone || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Manager Email*</p>
-                            <p className="font-medium text-slate-800">vg.pandula@gmail.com</p>
+                            <p className="font-medium text-slate-800">{data.managerEmail || "N/A"}</p>
                         </div>
                     </div>
 
                     {/* Operating Hours Table Preview */}
                     <div className="mt-6">
                         <div className="grid grid-cols-1 text-xs gap-y-2">
-                            <div className="flex bg-sky-100/50 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Monday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/30 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Tuesday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/50 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Wednesday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/30 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Thursday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/50 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Friday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/30 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Saturday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
-                            <div className="flex bg-sky-100/50 p-2 rounded">
-                                <span className="w-24 font-medium text-slate-700">Sunday:</span>
-                                <span className="text-slate-600 mr-4">Open</span>
-                                <span className="text-slate-600 mr-4">Open: 05:30:00</span>
-                                <span className="text-slate-600">Close: 05:30:00</span>
-                            </div>
+                            {data.operatingHours.map((hour, index) => (
+                                <div key={hour.day} className={`flex p-2 rounded ${index % 2 === 0 ? 'bg-sky-100/50' : 'bg-sky-100/30'}`}>
+                                    <span className="w-24 font-medium text-slate-700">{hour.day}:</span>
+                                    <span className="text-slate-600 mr-4">{hour.isOpen ? "Open" : "Closed"}</span>
+                                    {hour.isOpen && (
+                                        <>
+                                            <span className="text-slate-600 mr-4">Open: {formatTime(hour.openTime)}</span>
+                                            <span className="text-slate-600">Close: {formatTime(hour.closeTime)}</span>
+                                        </>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -155,58 +138,72 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 relative">
                     <div className="flex justify-between items-start mb-4">
                         <h3 className="font-semibold text-slate-800">Business Information</h3>
-                        <button className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium">
+                        <button 
+                             type="button"
+                             onClick={() => onGoToStep?.(3)}
+                             className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium"
+                        >
                             Edit <Edit2 size={12} className="ml-1" />
                         </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">Business Registered</p>
-                            <p className="font-medium text-slate-800">No</p>
+                            <p className="font-medium text-slate-800">{formatBool(data.businessRegistered)}</p>
                         </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">Parent name as per BR*</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">BR Number*</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">BR Document</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
+                        {data.businessRegistered && (
+                            <>
+                                <div>
+                                    <p className="text-slate-500 mb-1">Parent name as per BR*</p>
+                                    <p className="font-medium text-slate-800">{data.parentName || "N/A"}</p>
+                                </div>
+                                <div>
+                                    <p className="text-slate-500 mb-1">BR Number*</p>
+                                    <p className="font-medium text-slate-800">{data.brNumber || "N/A"}</p>
+                                </div>
+                                <div>
+                                    <p className="text-slate-500 mb-1">BR Document</p>
+                                    <p className="font-medium text-slate-800">{data.brDocument || "N/A"}</p>
+                                </div>
+                            </>
+                        )}
                         <div>
                             <p className="text-slate-500 mb-1">Tax Registered</p>
-                            <p className="font-medium text-slate-800">No</p>
+                            <p className="font-medium text-slate-800">{formatBool(data.taxRegistered)}</p>
                         </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">Tin Number*</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">Tax Certificate*</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">TDL</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
+                        {data.taxRegistered && (
+                            <>
+                                <div>
+                                    <p className="text-slate-500 mb-1">Tin Number*</p>
+                                    <p className="font-medium text-slate-800">{data.tinNumber || "N/A"}</p>
+                                </div>
+                                <div>
+                                    <p className="text-slate-500 mb-1">Tax Certificate*</p>
+                                    <p className="font-medium text-slate-800">{data.taxCertificate || "N/A"}</p>
+                                </div>
+                                <div>
+                                    <p className="text-slate-500 mb-1">TDL</p>
+                                    <p className="font-medium text-slate-800">{data.tdlDocument || "N/A"}</p>
+                                </div>
+                            </>
+                        )}
                         <div>
                             <p className="text-slate-500 mb-1">VAT Registered</p>
-                            <p className="font-medium text-slate-800">No</p>
+                            <p className="font-medium text-slate-800">{formatBool(data.vatRegistered)}</p>
                         </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">VAT Number*</p>
-                            <p className="font-medium text-slate-800">N/A</p>
-                        </div>
+                        {data.vatRegistered && (
+                            <div>
+                                <p className="text-slate-500 mb-1">VAT Number*</p>
+                                <p className="font-medium text-slate-800">{data.vatNumber || "N/A"}</p>
+                            </div>
+                        )}
                         <div>
                             <p className="text-slate-500 mb-1">NIC Front</p>
-                            <p className="font-medium text-slate-800">Document Attached</p>
+                            <p className="font-medium text-slate-800">{data.nicFront || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">NIC Back</p>
-                            <p className="font-medium text-slate-800">Document Attached</p>
+                            <p className="font-medium text-slate-800">{data.nicBack || "N/A"}</p>
                         </div>
                     </div>
                 </div>
@@ -215,27 +212,33 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 relative">
                     <div className="flex justify-between items-start mb-4">
                         <h3 className="font-semibold text-slate-800">Menu Information</h3>
-                        <button className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium">
+                        <button 
+                             type="button"
+                             onClick={() => onGoToStep?.(4)}
+                             className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium"
+                        >
                             Edit <Edit2 size={12} className="ml-1" />
                         </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">Menu*</p>
-                            <p className="font-medium text-slate-800">Document Attached</p>
+                            <p className="font-medium text-slate-800">{data.menuDocument || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Logo*</p>
-                            <p className="font-medium text-slate-800">Document Attached</p>
+                            <p className="font-medium text-slate-800">{data.outletLogo || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Do you have images you can provide?</p>
-                            <p className="font-medium text-slate-800">no</p>
+                            <p className="font-medium text-slate-800">{data.hasImages}</p>
                         </div>
-                        <div>
-                            <p className="text-slate-500 mb-1">Upload Images</p>
-                            <p className="font-medium text-slate-800">No Document</p>
-                        </div>
+                        {data.hasImages === 'Yes' && (
+                            <div>
+                                <p className="text-slate-500 mb-1">Upload Images</p>
+                                <p className="font-medium text-slate-800">{data.itemImages || "N/A"}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -243,34 +246,38 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
                 <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 relative">
                     <div className="flex justify-between items-start mb-4">
                         <h3 className="font-semibold text-slate-800">Bank Details</h3>
-                        <button className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium">
+                        <button 
+                             type="button"
+                             onClick={() => onGoToStep?.(5)}
+                             className="text-slate-400 hover:text-slate-600 flex items-center text-xs font-medium"
+                        >
                             Edit <Edit2 size={12} className="ml-1" />
                         </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">Beneficiary Name*</p>
-                            <p className="font-medium text-slate-800">gignann sada</p>
+                            <p className="font-medium text-slate-800">{data.beneficiaryName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Account Number*</p>
-                            <p className="font-medium text-slate-800">4542342524245254252</p>
+                            <p className="font-medium text-slate-800">{data.accountNumber || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Bank Name*</p>
-                            <p className="font-medium text-slate-800">Commercial Credit & Finance PLC</p>
+                            <p className="font-medium text-slate-800">{data.bankName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Branch Name*</p>
-                            <p className="font-medium text-slate-800">Anuradhapura</p>
+                            <p className="font-medium text-slate-800">{data.branchName || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Branch Code*</p>
-                            <p className="font-medium text-slate-800">76</p>
+                            <p className="font-medium text-slate-800">{data.branchCode || "N/A"}</p>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Soft Copy of the Bank Statement Or Passbook*</p>
-                            <p className="font-medium text-slate-800">Document Attached</p>
+                            <p className="font-medium text-slate-800">{data.bankStatement || "N/A"}</p>
                         </div>
                     </div>
                 </div>
@@ -278,7 +285,16 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit }) => {
             </div>
 
             {/* Footer Actions */}
-            <div className="flex justify-start pt-8">
+            <div className="flex justify-between items-center pt-8">
+                 <button
+                    type="button"
+                    onClick={onPrev}
+                    className="px-6 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-full transition-all flex items-center shadow-sm"
+                >
+                    <ArrowLeft size={18} className="mr-2" />
+                    Prev
+                </button>
+
                 <button
                     type="button"
                     onClick={onSubmit}
