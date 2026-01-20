@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Sidebar } from "./components/Sidebar";
 
@@ -10,6 +9,8 @@ import { Step3BusinessInfo } from "./components/Step3BusinessInfo";
 import { Step4MenuInfo } from "./components/Step4MenuInfo";
 import { Step5BankDetails } from "./components/Step5BankDetails";
 import { Step6Summary } from "./components/Step6Summary";
+
+import { SignUpFormData, initialFormData } from "./types";
 
 // Placeholder components for steps
 
@@ -26,6 +27,11 @@ const StepPlaceholder = ({ step, onNext, onPrev }: { step: number; onNext: () =>
 
 export default function SignUpPage() {
     const [currentStep, setCurrentStep] = useState(1);
+    const [formData, setFormData] = useState<SignUpFormData>(initialFormData);
+
+    const updateFormData = (updates: Partial<SignUpFormData>) => {
+        setFormData((prev) => ({ ...prev, ...updates }));
+    };
 
     const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6));
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
@@ -56,12 +62,53 @@ export default function SignUpPage() {
                     <div className="flex-1 p-8 md:p-12 overflow-y-auto">
                         <div className="max-w-3xl mx-auto">
                             {/* Render Step Content Based on currentStep */}
-                            {currentStep === 1 && <Step1MerchantSignup onNext={nextStep} />}
-                            {currentStep === 2 && <Step2ContactInfo onNext={nextStep} onPrev={prevStep} />}
-                            {currentStep === 3 && <Step3BusinessInfo onNext={nextStep} onPrev={prevStep} />}
-                            {currentStep === 4 && <Step4MenuInfo onNext={nextStep} onPrev={prevStep} />}
-                            {currentStep === 5 && <Step5BankDetails onNext={nextStep} onPrev={prevStep} />}
-                            {currentStep === 6 && <Step6Summary onPrev={prevStep} onSubmit={() => alert("Submitted!")} />}
+                            {currentStep === 1 && (
+                                <Step1MerchantSignup 
+                                    onNext={nextStep} 
+                                    data={formData} 
+                                    updateData={updateFormData} 
+                                />
+                            )}
+                            {currentStep === 2 && (
+                                <Step2ContactInfo 
+                                    onNext={nextStep} 
+                                    onPrev={prevStep} 
+                                    data={formData} 
+                                    updateData={updateFormData} 
+                                />
+                            )}
+                            {currentStep === 3 && (
+                                <Step3BusinessInfo 
+                                    onNext={nextStep} 
+                                    onPrev={prevStep} 
+                                    data={formData} 
+                                    updateData={updateFormData} 
+                                />
+                            )}
+                            {currentStep === 4 && (
+                                <Step4MenuInfo 
+                                    onNext={nextStep} 
+                                    onPrev={prevStep} 
+                                    data={formData} 
+                                    updateData={updateFormData} 
+                                />
+                            )}
+                            {currentStep === 5 && (
+                                <Step5BankDetails 
+                                    onNext={nextStep} 
+                                    onPrev={prevStep} 
+                                    data={formData} 
+                                    updateData={updateFormData} 
+                                />
+                            )}
+                            {currentStep === 6 && (
+                                <Step6Summary 
+                                    onPrev={prevStep} 
+                                    onSubmit={() => alert("Registration Submitted Successfully! \n\n" + JSON.stringify(formData, null, 2))} 
+                                    data={formData}
+                                    onGoToStep={setCurrentStep}
+                                />
+                            )}
                             {currentStep > 6 && <StepPlaceholder step={currentStep} onNext={nextStep} onPrev={prevStep} />}
                         </div>
                     </div>
