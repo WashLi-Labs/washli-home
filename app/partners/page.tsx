@@ -40,7 +40,7 @@ export default function PartnersPage() {
 
                         <Link
                             href="/sign-up"
-                            className="inline-block w-full py-4 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-lg rounded-full transition-colors duration-300"
+                            className="inline-block w-full py-4 md:py-5 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-base md:text-lg rounded-full transition-colors duration-300 touch-manipulation"
                         >
                             Sign Up
                         </Link>
