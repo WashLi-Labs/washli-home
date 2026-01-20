@@ -1,10 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  // Allow WebSocket connections from development origins
-  experimental: {
-    allowedDevOrigins: ['localhost:3000', '127.0.0.1:3000'],
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,POST,PUT,DELETE,OPTIONS' },
+        ],
+      },
+    ];
   },
 };
 
