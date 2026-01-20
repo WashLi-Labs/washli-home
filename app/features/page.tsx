@@ -31,13 +31,6 @@ export default function FeaturesPage() {
         </nav>
         <FeatureScroller />
         
-        {/* Transparent background image at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 md:h-96 pointer-events-none">
-          <div 
-            className="absolute inset-0 bg-[url('/Woman%20doing%20laundry%20in%20washing%20machine.png')] bg-contain bg-bottom bg-no-repeat opacity-30"
-            aria-hidden
-          />
-        </div>
       </div>
     </main>
   );

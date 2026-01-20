@@ -19,13 +19,13 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
 
             <div className="space-y-6">
                 {/* Disclaimer */}
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <h3 className="font-semibold text-slate-800 mb-2">Disclaimer:</h3>
-                    <p className="text-sm text-slate-600 mb-2 leading-relaxed">
+                <div className="bg-slate-50 p-3 sm:p-4 rounded-lg border border-slate-200">
+                    <h3 className="font-semibold text-slate-800 mb-2 text-sm sm:text-base">Disclaimer:</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 mb-2 leading-relaxed text-justify">
                         Please be advised that any delay in the onboarding process may occur if incorrect documentation is provided.
                         It is imperative to ensure that all documentation submitted is accurate and complete to avoid any potential delays.
                     </p>
-                    <p className="text-sm text-slate-600">
+                    <p className="text-xs sm:text-sm text-slate-600 text-justify">
                         We recommend watching the registration <span className="text-sky-500 font-medium cursor-pointer">tutorial video</span> if you require additional support.
                     </p>
                 </div>
@@ -33,21 +33,21 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                 <form className="space-y-8">
                     {/* Business Registration */}
                     <div className="space-y-2">
-                        <h3 className="font-semibold text-slate-800">Business Registration</h3>
+                        <h3 className="font-semibold text-slate-800 text-base sm:text-lg">Business Registration</h3>
                         <div className="space-y-2">
-                            <p className="text-sm text-slate-700">Business Registered</p>
+                            <p className="text-xs sm:text-sm text-slate-700">Business Registered</p>
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
                                     onClick={() => updateData({ businessRegistered: true })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => updateData({ businessRegistered: false })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${!data.businessRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -95,21 +95,21 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
 
                     {/* Tax Registration */}
                     <div className="space-y-2">
-                        <h3 className="font-semibold text-slate-800">Tax Registration</h3>
+                        <h3 className="font-semibold text-slate-800 text-base sm:text-lg">Tax Registration</h3>
                         <div className="space-y-2">
-                            <p className="text-sm text-slate-700">Tax Registered</p>
+                            <p className="text-xs sm:text-sm text-slate-700">Tax Registered</p>
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
                                     onClick={() => updateData({ taxRegistered: true })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => updateData({ taxRegistered: false })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${!data.taxRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -154,21 +154,21 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
 
                     {/* VAT Registered */}
                     <div className="space-y-2">
-                        <h3 className="font-semibold text-slate-800">VAT Registered</h3>
+                        <h3 className="font-semibold text-slate-800 text-base sm:text-lg">VAT Registered</h3>
                         <div className="space-y-2">
-                            <p className="text-sm text-slate-700">VAT Registered</p>
+                            <p className="text-xs sm:text-sm text-slate-700">VAT Registered</p>
                             <div className="flex bg-slate-100 rounded-full p-1 inline-flex">
                                 <button
                                     type="button"
                                     onClick={() => updateData({ vatRegistered: true })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     Yes
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => updateData({ vatRegistered: false })}
-                                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${!data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors ${!data.vatRegistered ? 'bg-sky-500 text-white shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
                                     No
                                 </button>
@@ -193,11 +193,11 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
 
                     {/* Personal Details (NIC) */}
                     <div className="space-y-4">
-                        <h3 className="font-semibold text-slate-800">Personal Details</h3>
+                        <h3 className="font-semibold text-slate-800 text-base sm:text-lg">Personal Details</h3>
 
                         <div className="space-y-4">
-                            <p className="text-sm font-medium text-slate-700">NIC</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <p className="text-xs sm:text-sm font-medium text-slate-700">NIC</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
                                 {/* Front Upload */}
                                 <div className="space-y-2">
                                     <label className="block text-sm text-slate-600">Front*</label>
@@ -220,23 +220,23 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                     </div>
 
                     {/* Footer Actions */}
-                    <div className="flex justify-between items-center pt-8">
+                    <div className="flex justify-between items-center pt-8 gap-3">
                         <button
                             type="button"
                             onClick={onPrev}
-                            className="px-6 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-full transition-all flex items-center shadow-sm"
+                            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold rounded-full transition-all flex items-center shadow-sm text-sm sm:text-base"
                         >
-                            <ArrowLeft size={18} className="mr-2" />
+                            <ArrowLeft size={16} className="mr-1 sm:mr-2" />
                             Prev
                         </button>
 
                         <button
                             type="button"
                             onClick={onNext}
-                            className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md flex items-center"
+                            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md flex items-center text-sm sm:text-base"
                         >
                             Next
-                            <ArrowRight size={18} className="ml-2" />
+                            <ArrowRight size={16} className="ml-1 sm:ml-2" />
                         </button>
                     </div>
                 </form>

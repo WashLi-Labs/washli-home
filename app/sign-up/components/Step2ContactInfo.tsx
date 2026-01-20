@@ -10,7 +10,7 @@ interface Step2Props {
 }
 
 export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, updateData }) => {
-    const handleHourChange = (index: number, field: keyof OperatingHour, value: any) => {
+    const handleHourChange = (index: number, field: keyof OperatingHour, value: string | boolean) => {
         const newHours = [...data.operatingHours];
         newHours[index] = { ...newHours[index], [field]: value };
         updateData({ operatingHours: newHours });
@@ -122,7 +122,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                 {/* Operating Days/Hours Info */}
                 <div className="space-y-4">
                     <h3 className="text-lg font-semibold text-slate-800">Operating Days/Hours</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">
+                    <p className="text-sm text-slate-500 leading-relaxed text-justify">
                         If your business needs to operate outside its usual hours, reach out to your dedicated account manager (when assigned).
                         They can help ensure your operating hours are accurately reflected and avoid any confusion for customers.
                         This way, both our platform and your customers are kept informed, leading to a smoother experience for everyone!
@@ -130,54 +130,58 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                 </div>
 
                 {/* Schedule Table */}
-                <div className="bg-slate-50 rounded-xl overflow-hidden border border-slate-200">
-                    {/* Header */}
-                    <div className="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
-                        <span className="font-semibold">Days</span>
-                        <span className="font-semibold mr-12">Hours (Open/Close)</span>
-                    </div>
+                <div className="overflow-x-auto -mx-4 sm:mx-0">
+                    <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+                        <div className="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 min-w-[600px] sm:min-w-0">
+                            {/* Header */}
+                            <div className="bg-slate-900 text-white px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+                                <span className="font-semibold text-sm sm:text-base">Days</span>
+                                <span className="font-semibold text-sm sm:text-base mr-8 sm:mr-12">Hours (Open/Close)</span>
+                            </div>
 
-                    {/* Rows */}
-                    <div className="divide-y divide-slate-200">
-                        {data.operatingHours.map((hour, index) => (
-                            <div key={hour.day} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/50 hover:bg-white transition-colors">
-                                <span className="font-medium text-slate-700 min-w-[100px]">{hour.day}</span>
+                            {/* Rows */}
+                            <div className="divide-y divide-slate-200">
+                                {data.operatingHours.map((hour, index) => (
+                                    <div key={hour.day} className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between bg-white/50 hover:bg-white transition-colors">
+                                        <span className="font-medium text-slate-700 min-w-[80px] sm:min-w-[100px] text-sm sm:text-base">{hour.day}</span>
 
-                                <div className="flex items-center gap-6">
-                                    <label className="flex items-center space-x-2 cursor-pointer">
-                                        <input 
-                                            type="checkbox" 
-                                            checked={!hour.isOpen} 
-                                            onChange={(e) => handleHourChange(index, "isOpen", !e.target.checked)}
-                                            className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400" 
-                                        />
-                                        <span className="text-sm text-slate-600">Close</span>
-                                    </label>
+                                        <div className="flex items-center gap-3 sm:gap-4 justify-end">
+                                            <label className="flex items-center space-x-1.5 sm:space-x-2 cursor-pointer shrink-0">
+                                                <input 
+                                                    type="checkbox" 
+                                                    checked={!hour.isOpen} 
+                                                    onChange={(e) => handleHourChange(index, "isOpen", !e.target.checked)}
+                                                    className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400" 
+                                                />
+                                                <span className="text-xs sm:text-sm text-slate-600">Close</span>
+                                            </label>
 
-                                    <div className={`flex items-center gap-3 transition-opacity ${!hour.isOpen ? "opacity-50 pointer-events-none" : ""}`}>
-                                        <div className="relative">
-                                            <input 
-                                                type="time" 
-                                                value={hour.openTime} 
-                                                onChange={(e) => handleHourChange(index, "openTime", e.target.value)}
-                                                className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" 
-                                            />
-                                            <Clock className="absolute left-2.5 top-2.5 text-slate-400" size={14} />
-                                        </div>
-                                        <span className="text-slate-400">—</span>
-                                        <div className="relative">
-                                            <input 
-                                                type="time" 
-                                                value={hour.closeTime} 
-                                                onChange={(e) => handleHourChange(index, "closeTime", e.target.value)}
-                                                className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" 
-                                            />
-                                            <Clock className="absolute left-2.5 top-2.5 text-slate-400" size={14} />
+                                            <div className={`flex items-center gap-2 sm:gap-3 transition-opacity ${!hour.isOpen ? "opacity-50 pointer-events-none" : ""}`}>
+                                                <div className="relative">
+                                                    <input 
+                                                        type="time" 
+                                                        value={hour.openTime} 
+                                                        onChange={(e) => handleHourChange(index, "openTime", e.target.value)}
+                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto" 
+                                                    />
+                                                    <Clock className="absolute left-2 sm:left-2.5 top-2 sm:top-2.5 text-slate-400" size={12} />
+                                                </div>
+                                                <span className="text-slate-400 text-sm">—</span>
+                                                <div className="relative">
+                                                    <input 
+                                                        type="time" 
+                                                        value={hour.closeTime} 
+                                                        onChange={(e) => handleHourChange(index, "closeTime", e.target.value)}
+                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto" 
+                                                    />
+                                                    <Clock className="absolute left-2 sm:left-2.5 top-2 sm:top-2.5 text-slate-400" size={12} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>
 

@@ -87,15 +87,15 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         </div>
                     )}
 
-                    <p className="text-sm text-slate-500 leading-relaxed max-w-2xl">
-                        Images enhance the way merchants engage with customers, making them essential. If you lack images, don't hesitate to contact your Account Manager for support when assigned
+                    <p className="text-sm text-slate-500 leading-relaxed max-w-2xl text-justify">
+                        Images enhance the way merchants engage with customers, making them essential. If you lack images, don&apos;t hesitate to contact your Account Manager for support when assigned
                     </p>
                 </div>
 
                 {/* Note */}
                 <div className="space-y-2">
                     <h3 className="font-semibold text-slate-800 text-sm">Note:</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed max-w-3xl">
+                    <p className="text-sm text-slate-500 leading-relaxed max-w-3xl text-justify">
                         Please be advised that any delay in the onboarding process may occur if incorrect documentation is provided.
                         It is imperative to ensure that all documentation submitted is accurate and complete to avoid any potential delays
                     </p>
