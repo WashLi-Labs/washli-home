@@ -26,8 +26,8 @@ export default function FeaturesPage() {
 
           <NavLinks />
 
-          {/* Spacer to preserve navbar alignment after removing the CTA */}
-          <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
+          {/* Spacer to preserve navbar alignment on desktop */}
+          <div className="hidden md:block min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
         </nav>
         <FeatureScroller />
       </div>
