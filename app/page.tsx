@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-// Removed unused Link import after extracting NavLinks component.
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 // Removed unused lucide-react icons after replacing download buttons.
 import { FaGooglePlay, FaApple, FaAppStore } from "react-icons/fa";
@@ -21,9 +21,9 @@ export default function Home() {
       <div className="relative z-10">
         <nav className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <a href="/" className="text-3xl font-bold">
+            <Link href="/" className="text-3xl font-bold">
               Wash<span className="text-sky-500">L</span>i
-            </a>
+            </Link>
           </div>
 
           <NavLinks />

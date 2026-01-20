@@ -140,7 +140,7 @@ export default function FeatureScroller() {
               data-card
               className="shrink-0 group relative flex flex-col snap-center gap-3 md:gap-4 w-72 sm:w-80 md:w-auto md:basis-1/3 lg:basis-1/4 h-[420px] md:h-112 lg:h-110 p-5 md:p-6 rounded-3xl bg-white/10 backdrop-blur-md border border-white/30 shadow-xl shadow-sky-500/10 ring-1 ring-sky-400/40 hover:ring-sky-400 transition duration-300 touch-manipulation"
             >
-              <h3 className="text-base md:text-lg font-semibold text-gray-1000 text-center pt-1 min-h-[48px] flex items-center justify-center">
+              <h3 className="text-lg md:text-xl font-bold text-blue-900 text-center pt-1 min-h-[48px] flex items-center justify-center">
                 {f.title}
               </h3>
               <div className="flex-1 flex items-center justify-center py-2">

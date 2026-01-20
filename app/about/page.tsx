@@ -1,47 +1,61 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 // import { Button } from "@/components/ui/button";
 import NavLinks from "@/components/nav-links";
-import { FiUsers } from "react-icons/fi";
 import { useRef, useCallback } from "react";
 
 type TeamMember = {
   name: string;
   role: string;
+  designation: string;
   blurb: string;
+  image: string;
 };
 
 const team: TeamMember[] = [
   {
     name: "Poornima Dunusingha",
     role: "Team Lead",
+    designation: "Software Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/PoornimaDunusinghe.png",
   },
   {
     name: "Jude Bevan",
     role: "Team member",
+    designation: "DevOps and R&D Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/JudeBevan.png",
   },
   {
     name: "Randeep Rudhra",
     role: "Team member",
+    designation: "DevOps (Middlewares) Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/RandeepRudra.png",
   },
   {
     name: "Piyumi Wickramarathna",
     role: "Team member",
+    designation: "QA Automation Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/PiyumiKavindya.png",
   },
   {
     name: "Gihan Pandula",
     role: "Team member",
+    designation: "DevOps and R&D Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/GihanPandula.png",
   },
   {
     name: "Peenaka Wedamulla",
     role: "Team member",
+    designation: "QA Automation and R&D Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
+    image: "/team/PeenakaWedamulla.png",
   },
 ];
 
@@ -169,14 +183,20 @@ export default function AboutPage() {
                 data-card
                 className="shrink-0 group relative flex flex-col snap-center gap-3 w-72 sm:w-80 md:w-auto md:basis-1/3 lg:basis-1/4 min-h-[280px] p-5 md:p-6 rounded-3xl bg-white/25 backdrop-blur-md border border-white/50 shadow-xl shadow-sky-500/10 ring-1 ring-sky-300/40 items-center text-center touch-manipulation"
               >
-                <div className="w-20 h-20 rounded-full bg-sky-100 flex items-center justify-center ring-1 ring-sky-300/60 mt-2">
-                  <FiUsers className="text-sky-500" size={36} />
+                <div className="relative w-20 h-20 rounded-full overflow-hidden ring-2 ring-sky-300/60 mt-2">
+                  <Image
+                    src={t.image}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <h3 className="mt-2 text-base md:text-lg font-semibold text-gray-900 px-2">
                   {t.name}
                 </h3>
                 <p className="text-sky-600 font-semibold text-sm">{t.role}</p>
-                <p className="text-gray-700 text-xs md:text-sm leading-relaxed px-2">{t.blurb}</p>
+                <p className="text-gray-800 font-medium text-xs">{t.designation}</p>
+                <p className="text-gray-600 text-[10px] leading-tight px-2">{t.blurb}</p>
                 <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-white/40 group-hover:ring-white/60 transition" />
               </article>
             ))}
