@@ -18,10 +18,50 @@ const steps = [
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentStep, onStepClick, navigationEnabled = false }) => {
     return (
-        <div className="w-full md:w-64 bg-white/10 border-r border-white/20 p-6 flex flex-col hidden md:flex min-h-screen">
-            <div className="mb-4">
-                <h2 className="font-bold text-lg mb-6">Merchant Onboarding</h2>
-                <div className="relative border-l-2 border-slate-200 ml-3 space-y-8 py-2">
+        <>
+            {/* Mobile Horizontal Stepper */}
+            <div className="md:hidden w-full bg-white/10 border-b border-white/20 p-4 overflow-x-auto">
+                <div className="flex items-center justify-between min-w-max gap-2">
+                    {steps.map((step, index) => {
+                        const isActive = currentStep === step.id;
+                        const isCompleted = currentStep > step.id;
+                        return (
+                            <React.Fragment key={step.id}>
+                                <div
+                                    className={`flex flex-col items-center ${
+                                        navigationEnabled ? "cursor-pointer" : "cursor-default"
+                                    }`}
+                                    onClick={() => navigationEnabled && onStepClick(step.id)}
+                                >
+                                    <div
+                                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-colors ${
+                                            isActive
+                                                ? "bg-yellow-400 text-black"
+                                                : isCompleted
+                                                ? "bg-green-500 text-white"
+                                                : "bg-white border-2 border-slate-300 text-slate-400"
+                                        }`}
+                                    >
+                                        {isCompleted ? "✓" : step.id}
+                                    </div>
+                                    <span className="text-[10px] mt-1 text-center max-w-[60px] leading-tight">
+                                        {step.label}
+                                    </span>
+                                </div>
+                                {index < steps.length - 1 && (
+                                    <div className="w-8 h-0.5 bg-slate-200 mb-4" />
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* Desktop Vertical Sidebar */}
+            <div className="hidden md:flex w-full md:w-64 bg-white/10 border-r border-white/20 p-6 flex-col">
+                <div className="mb-4">
+                    <h2 className="font-bold text-lg mb-6">Merchant Onboarding</h2>
+                    <div className="relative border-l-2 border-slate-200 ml-3 space-y-8 py-2">
                     {steps.map((step) => {
                         const isActive = currentStep === step.id;
                         const isCompleted = currentStep > step.id;
@@ -72,8 +112,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentStep, onStepClick, navi
                             </div>
                         );
                     })}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };

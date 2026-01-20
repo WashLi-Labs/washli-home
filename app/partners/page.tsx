@@ -22,9 +22,8 @@ export default function PartnersPage() {
                         </Link>
                     </div>
                     <NavLinks />
-                    {/* Spacer to preserve navbar alignment since we don't have a right-side CTA here either, 
-              matching the behavior in Contact Page */}
-                    <div className="min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
+                    {/* Spacer to preserve navbar alignment on desktop */}
+                    <div className="hidden md:block min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
                 </nav>
 
                 {/* content content centered */}
