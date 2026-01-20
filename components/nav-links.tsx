@@ -51,7 +51,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({
         {links.map((l) => {
           const isActive =
             pathname === l.href || (l.href.startsWith("#") && pathname === "/");
-          const base = "font-bold transition-colors";
+          const base = "font-bold transition-colors text-center whitespace-nowrap";
           const activeCls = "text-sky-500 hover:text-sky-600";
           const inactiveCls = "text-black hover:text-sky-500";
           return (

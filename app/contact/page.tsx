@@ -68,9 +68,9 @@ export default function ContactPage() {
         </nav>
 
         {/* UPDATED: Changed py-12 md:py-16 to py-10 md:py-14 to match About Page exactly */}
-        <div className="mx-auto max-w-7xl px-6 py-10 md:py-14">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 md:py-14">
           {/* Main Grid: 2 Columns */}
-          <div className="grid md:grid-cols-2 gap-12 md:gap-40 items-start">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-40 items-start">
             {/* LEFT COLUMN: Text + Icons */}
             {/* UPDATED: Removed pt-2 here so it starts at the very top */}
             <div className="flex flex-col h-full">
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-medium py-3 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-medium py-3.5 md:py-4 text-base transition-colors disabled:opacity-60 disabled:cursor-not-allowed touch-manipulation"
                   >
                     {submitting
                       ? "Sending..."
@@ -198,7 +198,7 @@ function Input({ label, invalid, ...rest }: InputProps) {
         aria-label={label}
         placeholder={label}
         {...rest}
-        className={`w-full rounded-lg bg-white/70 px-4 py-3 text-sm outline-none ring-1 ring-transparent focus:ring-sky-400 transition ${
+        className={`w-full rounded-lg bg-white/70 px-4 py-3.5 text-sm md:text-base outline-none ring-1 ring-transparent focus:ring-sky-400 transition touch-manipulation ${
           invalid ? "border border-red-400" : "border border-white/40"
         }`}
       />
@@ -217,7 +217,7 @@ function TextArea({ label, ...rest }: TextAreaProps) {
       aria-label={label}
       placeholder={label}
       {...rest}
-      className="w-full rounded-lg bg-white/70 px-4 py-3 text-sm outline-none border border-white/40 ring-1 ring-transparent focus:ring-sky-400 transition"
+      className="w-full rounded-lg bg-white/70 px-4 py-3.5 text-sm md:text-base outline-none border border-white/40 ring-1 ring-transparent focus:ring-sky-400 transition touch-manipulation"
     />
   );
 }
