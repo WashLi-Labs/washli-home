@@ -32,7 +32,7 @@ const team: TeamMember[] = [
   {
     name: "Randeep Rudhra",
     role: "Team member",
-    designation: "DevOps (Middlewares) Engineer",
+    designation: "DevOps & Middleware Engineer",
     blurb: "3+ years in fin-tech and tech innovations",
     image: "/team/RandeepRudra.png",
   },
