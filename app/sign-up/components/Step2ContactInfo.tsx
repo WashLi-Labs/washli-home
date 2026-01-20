@@ -1,22 +1,21 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, Clock, Mail, Phone, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Mail, Phone } from "lucide-react";
+import { SignUpFormData, OperatingHour } from "../types";
 
 interface Step2Props {
     onNext: () => void;
     onPrev: () => void;
+    data: SignUpFormData;
+    updateData: (updates: Partial<SignUpFormData>) => void;
 }
 
-const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-];
+export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, updateData }) => {
+    const handleHourChange = (index: number, field: keyof OperatingHour, value: any) => {
+        const newHours = [...data.operatingHours];
+        newHours[index] = { ...newHours[index], [field]: value };
+        updateData({ operatingHours: newHours });
+    };
 
-export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -31,14 +30,26 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Name*</label>
                             <div className="relative">
-                                <input type="text" placeholder="Enter Owner Name" className="w-full pl-4 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.ownerName}
+                                    onChange={(e) => updateData({ ownerName: e.target.value })}
+                                    placeholder="Enter Owner Name" 
+                                    className="w-full pl-4 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Phone Number*</label>
                             <div className="relative">
-                                <input type="text" placeholder="Enter Phone Number" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.ownerPhone}
+                                    onChange={(e) => updateData({ ownerPhone: e.target.value })}
+                                    placeholder="Enter Phone Number" 
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
                         </div>
@@ -48,7 +59,13 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Email*</label>
                             <div className="relative">
-                                <input type="email" placeholder="Enter Owner Email" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="email" 
+                                    value={data.ownerEmail}
+                                    onChange={(e) => updateData({ ownerEmail: e.target.value })}
+                                    placeholder="Enter Owner Email" 
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
                         </div>
@@ -59,14 +76,26 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Name*</label>
                             <div className="relative">
-                                <input type="text" placeholder="Enter Manager Name" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.managerName}
+                                    onChange={(e) => updateData({ managerName: e.target.value })}
+                                    placeholder="Enter Manager Name" 
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Phone Number*</label>
                             <div className="relative">
-                                <input type="text" placeholder="Enter Phone Number" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="text" 
+                                    value={data.managerPhone}
+                                    onChange={(e) => updateData({ managerPhone: e.target.value })}
+                                    placeholder="Enter Phone Number" 
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
                         </div>
@@ -77,7 +106,13 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Email*</label>
                             <div className="relative">
-                                <input type="email" placeholder="Enter Manager Email" className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                <input 
+                                    type="email" 
+                                    value={data.managerEmail}
+                                    onChange={(e) => updateData({ managerEmail: e.target.value })}
+                                    placeholder="Enter Manager Email" 
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
                         </div>
@@ -104,24 +139,39 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev }) => {
 
                     {/* Rows */}
                     <div className="divide-y divide-slate-200">
-                        {days.map((day) => (
-                            <div key={day} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/50 hover:bg-white transition-colors">
-                                <span className="font-medium text-slate-700 min-w-[100px]">{day}</span>
+                        {data.operatingHours.map((hour, index) => (
+                            <div key={hour.day} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/50 hover:bg-white transition-colors">
+                                <span className="font-medium text-slate-700 min-w-[100px]">{hour.day}</span>
 
                                 <div className="flex items-center gap-6">
                                     <label className="flex items-center space-x-2 cursor-pointer">
-                                        <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400" />
+                                        <input 
+                                            type="checkbox" 
+                                            checked={!hour.isOpen} 
+                                            onChange={(e) => handleHourChange(index, "isOpen", !e.target.checked)}
+                                            className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400" 
+                                        />
                                         <span className="text-sm text-slate-600">Close</span>
                                     </label>
 
-                                    <div className="flex items-center gap-3">
+                                    <div className={`flex items-center gap-3 transition-opacity ${!hour.isOpen ? "opacity-50 pointer-events-none" : ""}`}>
                                         <div className="relative">
-                                            <input type="time" defaultValue="05:30" className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                            <input 
+                                                type="time" 
+                                                value={hour.openTime} 
+                                                onChange={(e) => handleHourChange(index, "openTime", e.target.value)}
+                                                className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                            />
                                             <Clock className="absolute left-2.5 top-2.5 text-slate-400" size={14} />
                                         </div>
                                         <span className="text-slate-400">—</span>
                                         <div className="relative">
-                                            <input type="time" defaultValue="17:30" className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" />
+                                            <input 
+                                                type="time" 
+                                                value={hour.closeTime} 
+                                                onChange={(e) => handleHourChange(index, "closeTime", e.target.value)}
+                                                className="pl-8 pr-2 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                            />
                                             <Clock className="absolute left-2.5 top-2.5 text-slate-400" size={14} />
                                         </div>
                                     </div>
