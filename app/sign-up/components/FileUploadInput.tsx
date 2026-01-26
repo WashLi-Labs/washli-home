@@ -3,7 +3,7 @@ import { Upload } from "lucide-react";
 
 interface FileUploadInputProps {
     value?: string;
-    onFileSelect: (fileName: string) => void;
+    onFileSelect: (base64: string) => void;
     placeholder?: string;
 }
 
@@ -17,7 +17,13 @@ export const FileUploadInput: React.FC<FileUploadInputProps> = ({ value, onFileS
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            onFileSelect(file.name);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                // We pass the base64 string to the parent
+                onFileSelect(base64String);
+            };
+            reader.readAsDataURL(file);
         }
     };
 
@@ -26,15 +32,15 @@ export const FileUploadInput: React.FC<FileUploadInputProps> = ({ value, onFileS
             <input
                 type="text"
                 placeholder={placeholder}
-                value={value || ""}
+                value={value ? (value.startsWith("data:") ? "File Selected" : value) : ""}
                 readOnly
                 className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
             />
-            <input 
-                type="file" 
-                ref={fileInputRef} 
-                onChange={handleFileChange} 
-                className="hidden" 
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
             />
             <button
                 type="button"
