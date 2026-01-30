@@ -37,11 +37,29 @@ export default function ContactPage() {
     if (!fields.name || !fields.email || !fields.message) return;
     if (!validEmail(fields.email)) return;
     setSubmitting(true);
-    // Simulate network request. Replace with real API endpoint later.
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitting(false);
-    setSent(true);
-    setFields(initialState);
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fields),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setFields(initialState);
+      } else {
+        const data = await res.json();
+        console.error("Failed to send message:", data);
+        // Optionally handle error state specifically here
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
