@@ -25,8 +25,6 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
     const [captchaValue, setCaptchaValue] = useState("");
     const [captchaInput, setCaptchaInput] = useState("");
 
-<<<<<<< HEAD
-=======
     // Initialize captcha on mount
     useEffect(() => {
         setCaptchaValue(generateCaptcha());
@@ -37,7 +35,6 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
         setCaptchaInput("");
     };
     
->>>>>>> 4c55e252e5e8385c0c13dfb99c54f98855adc087
     // OTP State (Transient)
     const [otpSent, setOtpSent] = useState(false);
     const [verificationCode, setVerificationCode] = useState("");
@@ -104,11 +101,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                 <div className="bg-slate-100 px-6 py-3 rounded-lg select-none font-mono text-xl tracking-widest text-slate-500 line-through decoration-pink-500 decoration-2 italic font-bold border border-slate-200" style={{ letterSpacing: '0.5em', background: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxwYXRoIGQ9Ik0wIDUwTDUwIDAiIHN0cm9rZT0iI2RiZNWNlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+') opacity-50" }}>
                                     {captchaValue}
                                 </div>
-<<<<<<< HEAD
-                                <button type="button" onClick={() => {/* Regenerate mock */ }} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
-=======
                                 <button type="button" onClick={handleRefreshCaptcha} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
->>>>>>> 4c55e252e5e8385c0c13dfb99c54f98855adc087
                                     <RefreshCw size={20} className="text-slate-600" />
                                 </button>
                             </div>
