@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Sidebar } from "./components/Sidebar";
 
@@ -11,6 +12,7 @@ import { Step5BankDetails } from "./components/Step5BankDetails";
 import { Step6Summary } from "./components/Step6Summary";
 
 import { SignUpFormData, initialFormData } from "./types";
+import { API_BASE_URL, MERCHANT_REGISTER_ENDPOINT } from "@/lib/config";
 
 // Placeholder components for steps
 
@@ -26,6 +28,7 @@ const StepPlaceholder = ({ step, onNext, onPrev }: { step: number; onNext: () =>
 );
 
 export default function SignUpPage() {
+    const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState<SignUpFormData>(initialFormData);
 
@@ -35,6 +38,38 @@ export default function SignUpPage() {
 
     const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6));
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleFormSubmit = async () => {
+        setIsSubmitting(true);
+        try {
+            const { ...payload } = formData;
+            const response = await fetch(`${API_BASE_URL}${MERCHANT_REGISTER_ENDPOINT}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || "Registration failed");
+            }
+
+            const responseData = await response.json();
+            console.log("Registration Success:", responseData);
+            alert("Registration Submitted Successfully! Welcome aboard.");
+            router.push("/sign-up"); // Navigate to root partner page
+        } catch (error: any) {
+            console.error("Registration Error:", error);
+            alert(`Error: ${error.message || "Something went wrong"}`);
+            // Stay on the page (no navigation)
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col font-sans">
@@ -63,52 +98,53 @@ export default function SignUpPage() {
                         <div className="max-w-3xl mx-auto">
                             {/* Render Step Content Based on currentStep */}
                             {currentStep === 1 && (
-                                <Step1MerchantSignup 
-                                    onNext={nextStep} 
-                                    data={formData} 
-                                    updateData={updateFormData} 
+                                <Step1MerchantSignup
+                                    onNext={nextStep}
+                                    data={formData}
+                                    updateData={updateFormData}
                                 />
                             )}
                             {currentStep === 2 && (
-                                <Step2ContactInfo 
-                                    onNext={nextStep} 
-                                    onPrev={prevStep} 
-                                    data={formData} 
-                                    updateData={updateFormData} 
+                                <Step2ContactInfo
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                    data={formData}
+                                    updateData={updateFormData}
                                 />
                             )}
                             {currentStep === 3 && (
-                                <Step3BusinessInfo 
-                                    onNext={nextStep} 
-                                    onPrev={prevStep} 
-                                    data={formData} 
-                                    updateData={updateFormData} 
+                                <Step3BusinessInfo
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                    data={formData}
+                                    updateData={updateFormData}
                                 />
                             )}
                             {currentStep === 4 && (
-                                <Step4MenuInfo 
-                                    onNext={nextStep} 
-                                    onPrev={prevStep} 
-                                    data={formData} 
-                                    updateData={updateFormData} 
+                                <Step4MenuInfo
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                    data={formData}
+                                    updateData={updateFormData}
                                 />
                             )}
                             {currentStep === 5 && (
-                                <Step5BankDetails 
-                                    onNext={nextStep} 
-                                    onPrev={prevStep} 
-                                    data={formData} 
-                                    updateData={updateFormData} 
+                                <Step5BankDetails
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                    data={formData}
+                                    updateData={updateFormData}
                                 />
                             )}
                             {currentStep === 6 && (
-                                <Step6Summary 
-                                    onPrev={prevStep} 
-                                    onSubmit={() => alert("Registration Submitted Successfully! \n\n" + JSON.stringify(formData, null, 2))} 
+                                <Step6Summary
+                                    onPrev={prevStep}
+                                    onSubmit={handleFormSubmit}
                                     data={formData}
                                     onGoToStep={setCurrentStep}
                                 />
                             )}
+
                             {currentStep > 6 && <StepPlaceholder step={currentStep} onNext={nextStep} onPrev={prevStep} />}
                         </div>
                     </div>

@@ -90,7 +90,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
             </div>
 
             <form className="space-y-6">
-                
+
                 {/* Email Verification Section */}
                 {!data.isEmailVerified ? (
                     <div className="space-y-6">
@@ -98,8 +98,8 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Captcha*</label>
                             <div className="flex items-center gap-4">
-                                <div className="bg-slate-100 px-6 py-3 rounded-lg select-none font-mono text-xl tracking-widest text-slate-500 line-through decoration-pink-500 decoration-2 italic font-bold border border-slate-200" style={{ letterSpacing: '0.5em', background: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxwYXRoIGQ9Ik0wIDUwTDUwIDAiIHN0cm9rZT0iI2RiZNWNlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+') opacity-50"}}>
-                                   {captchaValue}
+                                <div className="bg-slate-100 px-6 py-3 rounded-lg select-none font-mono text-xl tracking-widest text-slate-500 line-through decoration-pink-500 decoration-2 italic font-bold border border-slate-200" style={{ letterSpacing: '0.5em', background: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxwYXRoIGQ9Ik0wIDUwTDUwIDAiIHN0cm9rZT0iI2RiZNWNlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+') opacity-50" }}>
+                                    {captchaValue}
                                 </div>
                                 <button type="button" onClick={handleRefreshCaptcha} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <RefreshCw size={20} className="text-slate-600" />
@@ -188,7 +188,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div>
                                     <button
                                         type="button"
@@ -224,7 +224,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                         <div className="space-y-2 pt-2">
                             <label className="block text-sm font-medium text-slate-700">How did you hear about us?*</label>
                             <div className="relative max-w-md">
-                                <select 
+                                <select
                                     value={data.howDidYouHear}
                                     onChange={(e) => updateData({ howDidYouHear: e.target.value })}
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none"
@@ -240,28 +240,12 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
 
                         {/* Grid for other fields */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                            <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700">Region*</label>
-                                <div className="relative">
-                                    <select 
-                                        value={data.region}
-                                        onChange={(e) => updateData({ region: e.target.value })}
-                                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none"
-                                    >
-                                        <option value="" disabled>Select Region</option>
-                                        <option>Embilipitiya</option>
-                                        <option>Colombo</option>
-                                        <option>Kandy</option>
-                                    </select>
-                                    <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
-                                </div>
-                            </div>
                             <div className="hidden md:block"></div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Merchant Type*</label>
                                 <div className="relative">
-                                    <select 
+                                    <select
                                         value={data.merchantType}
                                         onChange={(e) => updateData({ merchantType: e.target.value })}
                                         className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none"
@@ -278,46 +262,46 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Outlet Name*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.outletName}
                                     onChange={(e) => updateData({ outletName: e.target.value })}
-                                    placeholder="Enter Outlet Name" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Outlet Name"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
 
                             <div className="space-y-2 md:col-span-2">
                                 <label className="block text-sm font-medium text-slate-700">Outlet Address*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.outletAddress}
                                     onChange={(e) => updateData({ outletAddress: e.target.value })}
-                                    placeholder="Enter Outlet Address" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Outlet Address"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">City*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.city}
                                     onChange={(e) => updateData({ city: e.target.value })}
-                                    placeholder="Enter City" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter City"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Phone Number*</label>
                                 <div className="relative">
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         value={data.phoneNumber}
                                         onChange={(e) => updateData({ phoneNumber: e.target.value })}
-                                        placeholder="Enter Phone Number" 
-                                        className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                        placeholder="Enter Phone Number"
+                                        className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                     />
                                     {/* Placeholder icon */}
                                     <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
@@ -328,17 +312,17 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                 <label className="block text-sm font-medium text-slate-700">Pin* <Info size={14} className="inline text-slate-400" /></label>
                                 <div className="flex space-x-4">
                                     <div className="relative flex-1">
-                                        <input 
-                                            type="text" 
-                                            placeholder="Lat, Long" 
+                                        <input
+                                            type="text"
+                                            placeholder="Lat, Long"
                                             className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                             value={data.location ? `${data.location.lat.toFixed(4)}, ${data.location.lng.toFixed(4)}` : ""}
                                             readOnly
                                         />
                                         <MapPin className="absolute left-3 top-3.5 text-slate-400" size={18} />
                                     </div>
-                                    <button 
-                                        type="button" 
+                                    <button
+                                        type="button"
                                         onClick={() => setIsLocationPickerOpen(true)}
                                         className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-semibold rounded-lg text-sm transition-colors whitespace-nowrap text-white"
                                     >
@@ -362,7 +346,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                     </div>
                 )}
             </form>
-            
+
             <LocationPickerModal
                 isOpen={isLocationPickerOpen}
                 onClose={() => setIsLocationPickerOpen(false)}
