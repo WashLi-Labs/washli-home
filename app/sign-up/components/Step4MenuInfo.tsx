@@ -24,7 +24,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
 
                     {/* Template Download */}
                     <div className="bg-sky-50 border border-sky-100 rounded-lg p-4 flex items-center justify-between">
-                        <span className="text-sm font-medium text-slate-800">Click Here to Download Template - WashLi Food/ Market</span>
+                        <span className="text-sm font-medium text-slate-800">Click Here to Download Template - WashLi Laundry Services</span>
                         <button type="button" className="p-2 bg-sky-500 hover:bg-sky-600 rounded-full text-white transition-colors">
                             <Download size={18} />
                         </button>
