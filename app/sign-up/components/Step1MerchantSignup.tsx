@@ -154,7 +154,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                             type="email"
                                             value={data.email}
                                             onChange={(e) => updateData({ email: e.target.value })}
-                                            placeholder="vg.pandula@gmail.com"
+                                            placeholder="your_mail@gmail.com"
                                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
                                         />
                                     </div>
