@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+// ...existing imports...
+
+// Helper to generate a 6-digit OTP
+function generateOTP() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
 import { Check, Info, Phone, MapPin, ArrowRight, ChevronDown, RefreshCw, Lock } from "lucide-react";
 import { LocationPickerModal } from "./LocationPickerModal";
 import { SignUpFormData } from "../types";
@@ -39,6 +45,8 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
     const [otpSent, setOtpSent] = useState(false);
     const [verificationCode, setVerificationCode] = useState("");
     const [timer, setTimer] = useState(59);
+    const [serverOTP, setServerOTP] = useState("");
+    const [sending, setSending] = useState(false);
 
     // Form State (UI specific)
     const [isLocationPickerOpen, setIsLocationPickerOpen] = useState(false);
@@ -53,7 +61,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
         return () => clearInterval(interval);
     }, [otpSent, timer]);
 
-    const handleSendOTP = () => {
+    const handleSendOTP = async () => {
         if (captchaInput.toLowerCase() !== captchaValue.toLowerCase()) {
             alert("Invalid Captcha");
             return;
@@ -62,16 +70,38 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
             alert("Please enter email");
             return;
         }
-        setOtpSent(true);
-        setTimer(59);
+        const otp = generateOTP();
+        setSending(true);
+        try {
+            const res = await fetch("/api/send-otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: data.email, otp }),
+            });
+            if (res.ok) {
+                setOtpSent(true);
+                setTimer(59);
+                setServerOTP(otp);
+                alert("OTP sent to your email.");
+            } else {
+                alert("Failed to send OTP. Please try again.");
+            }
+        } catch (err) {
+            alert("Error sending OTP. Please try again.");
+        } finally {
+            setSending(false);
+        }
     };
 
     const handleVerify = () => {
-        // Mock verification
-        if (verificationCode) {
+        if (!verificationCode) {
+            alert("Please enter verification code");
+            return;
+        }
+        if (verificationCode === serverOTP) {
             updateData({ isEmailVerified: true });
         } else {
-            alert("Please enter verification code");
+            alert("Invalid OTP. Please check your email and try again.");
         }
     };
 
@@ -132,8 +162,9 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                         type="button"
                                         onClick={handleSendOTP}
                                         className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
+                                        disabled={sending}
                                     >
-                                        Send OTP
+                                        {sending ? "Sending..." : "Send OTP"}
                                     </button>
                                 </div>
                             </div>

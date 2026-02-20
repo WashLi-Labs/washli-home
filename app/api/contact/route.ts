@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { EMAIL_CONFIG } from '@/lib/emailConfig';
 
 export async function POST(request: Request) {
   try {
@@ -12,24 +13,23 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create a transporter using environment variables
-    // For Gmail, you might need an App Password if 2FA is enabled.
+
+    // Create transporter using Zoho SMTP config
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER, // e.g., your email
-        pass: process.env.EMAIL_PASS, // e.g., your app password
-      },
+      host: EMAIL_CONFIG.host,
+      port: EMAIL_CONFIG.port,
+      secure: EMAIL_CONFIG.secure,
+      auth: EMAIL_CONFIG.auth,
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'vg.pandula@gmail.com', // The requested recipient
+      from: EMAIL_CONFIG.from,
+      to: EMAIL_CONFIG.to,
       subject: `New Contact Form Message: ${subject || 'No Subject'}`,
       text: `
         Name: ${name}
         Email: ${email}
-        
+        Subject: ${subject || 'No Subject'}
         Message:
         ${message}
       `,
