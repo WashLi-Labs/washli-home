@@ -59,23 +59,34 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Parent name as per BR*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.parentName}
                                     onChange={(e) => updateData({ parentName: e.target.value })}
-                                    placeholder="Parent name as per BR" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Parent name as per BR"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">BR Number*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.brNumber}
                                     onChange={(e) => updateData({ brNumber: e.target.value })}
-                                    placeholder="BR Number" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="BR Number"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="block text-sm font-medium text-slate-700">BR Phone Number*</label>
+                                <input
+                                    type="tel"
+                                    value={data.brPhoneNumber}
+                                    onChange={(e) => updateData({ brPhoneNumber: e.target.value })}
+                                    placeholder="Enter Business Phone"
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 font-mono"
                                 />
                             </div>
 
@@ -121,12 +132,12 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">Tin Number*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.tinNumber}
                                     onChange={(e) => updateData({ tinNumber: e.target.value })}
-                                    placeholder="Tin Number" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Tin Number"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
 
@@ -180,12 +191,12 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                         <div className="pt-4 animate-fade-in-up">
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-slate-700">VAT Number*</label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.vatNumber}
                                     onChange={(e) => updateData({ vatNumber: e.target.value })}
-                                    placeholder="VAT Number" 
-                                    className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="VAT Number"
+                                    className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
                         </div>

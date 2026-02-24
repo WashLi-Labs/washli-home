@@ -30,12 +30,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Name*</label>
                             <div className="relative">
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.ownerName}
                                     onChange={(e) => updateData({ ownerName: e.target.value })}
-                                    placeholder="Enter Owner Name" 
-                                    className="w-full pl-4 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Owner Name"
+                                    className="w-full pl-4 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
                         </div>
@@ -43,12 +43,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Phone Number*</label>
                             <div className="relative">
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="tel"
                                     value={data.ownerPhone}
                                     onChange={(e) => updateData({ ownerPhone: e.target.value })}
-                                    placeholder="Enter Phone Number" 
-                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Phone Number"
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
@@ -59,12 +59,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Owner Email*</label>
                             <div className="relative">
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     value={data.ownerEmail}
                                     onChange={(e) => updateData({ ownerEmail: e.target.value })}
-                                    placeholder="Enter Owner Email" 
-                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="your email "
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
@@ -76,12 +76,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Name*</label>
                             <div className="relative">
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     value={data.managerName}
                                     onChange={(e) => updateData({ managerName: e.target.value })}
-                                    placeholder="Enter Manager Name" 
-                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Manager Name"
+                                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                             </div>
                         </div>
@@ -89,12 +89,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Phone Number*</label>
                             <div className="relative">
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="tel"
                                     value={data.managerPhone}
                                     onChange={(e) => updateData({ managerPhone: e.target.value })}
-                                    placeholder="Enter Phone Number" 
-                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="Enter Phone Number"
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
@@ -106,12 +106,12 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-slate-700">Outlet Manager Email*</label>
                             <div className="relative">
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     value={data.managerEmail}
                                     onChange={(e) => updateData({ managerEmail: e.target.value })}
-                                    placeholder="Enter Manager Email" 
-                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                                    placeholder="your email "
+                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
@@ -147,32 +147,32 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
 
                                         <div className="flex items-center gap-3 sm:gap-4 justify-end">
                                             <label className="flex items-center space-x-1.5 sm:space-x-2 cursor-pointer shrink-0">
-                                                <input 
-                                                    type="checkbox" 
-                                                    checked={!hour.isOpen} 
+                                                <input
+                                                    type="checkbox"
+                                                    checked={!hour.isOpen}
                                                     onChange={(e) => handleHourChange(index, "isOpen", !e.target.checked)}
-                                                    className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400" 
+                                                    className="w-4 h-4 rounded border-slate-300 text-sky-500 focus:ring-sky-400"
                                                 />
                                                 <span className="text-xs sm:text-sm text-slate-600">Close</span>
                                             </label>
 
                                             <div className={`flex items-center gap-2 sm:gap-3 transition-opacity ${!hour.isOpen ? "opacity-50 pointer-events-none" : ""}`}>
                                                 <div className="relative">
-                                                    <input 
-                                                        type="time" 
-                                                        value={hour.openTime} 
+                                                    <input
+                                                        type="time"
+                                                        value={hour.openTime}
                                                         onChange={(e) => handleHourChange(index, "openTime", e.target.value)}
-                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto" 
+                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto"
                                                     />
                                                     <Clock className="absolute left-2 sm:left-2.5 top-2 sm:top-2.5 text-slate-400" size={12} />
                                                 </div>
                                                 <span className="text-slate-400 text-sm">—</span>
                                                 <div className="relative">
-                                                    <input 
-                                                        type="time" 
-                                                        value={hour.closeTime} 
+                                                    <input
+                                                        type="time"
+                                                        value={hour.closeTime}
                                                         onChange={(e) => handleHourChange(index, "closeTime", e.target.value)}
-                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto" 
+                                                        className="pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 w-[110px] sm:w-auto"
                                                     />
                                                     <Clock className="absolute left-2 sm:left-2.5 top-2 sm:top-2.5 text-slate-400" size={12} />
                                                 </div>

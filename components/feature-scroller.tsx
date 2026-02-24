@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useCallback } from "react";
+import { useHorizontalScroller } from "@/hooks/use-horizontal-scroller";
+import ScrollerIndicator from "./scroller-indicator";
 
 interface FeatureItem {
   title: string;
@@ -57,38 +58,7 @@ const features: FeatureItem[] = [
 ];
 
 export default function FeatureScroller() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: e.deltaY, behavior: "smooth" });
-    }
-  }, []);
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      const el = scrollRef.current;
-      if (!el) return;
-      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        e.preventDefault();
-        const firstCard = el.querySelector<HTMLElement>("[data-card]");
-        const style = getComputedStyle(el);
-        const gapPx =
-          parseFloat(style.columnGap || "0") ||
-          parseFloat(style.gap || "0") ||
-          0;
-        const cardWidth = firstCard
-          ? firstCard.offsetWidth
-          : Math.max(280, el.clientWidth / 4);
-        const delta = cardWidth + gapPx;
-        el.scrollBy({
-          left: e.key === "ArrowRight" ? delta : -delta,
-          behavior: "smooth",
-        });
-      }
-    },
-    []
-  );
+  const { scrollRef, handleKeyDown, activeIndex, totalItems, scrollTo } = useHorizontalScroller();
 
   return (
     <section className="mt-4 flex w-full items-center justify-center py-8 md:py-10">
@@ -122,16 +92,15 @@ export default function FeatureScroller() {
 
         <div
           ref={scrollRef}
-          onWheel={handleWheel}
           onKeyDown={handleKeyDown}
           tabIndex={0}
           role="region"
           aria-label="Features scroller"
-          className="flex w-full gap-4 md:gap-6 overflow-x-auto pb-12 px-4 md:px-6 snap-x snap-mandatory scroll-smooth touch-pan-x overscroll-x-contain focus:outline-none scrollbar-hide"
+          className="flex w-full gap-4 md:gap-6 overflow-x-auto pb-12 px-4 md:px-6 snap-x snap-mandatory scroll-smooth touch-pan-x overscroll-x-contain focus:outline-none"
           style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch'
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           {features.map((f) => (
@@ -159,6 +128,13 @@ export default function FeatureScroller() {
             </div>
           ))}
         </div>
+
+        <ScrollerIndicator
+          totalItems={totalItems}
+          activeIndex={activeIndex}
+          scrollTo={scrollTo}
+          className="-mt-4 mb-4"
+        />
       </div>
     </section>
   );
