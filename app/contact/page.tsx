@@ -1,33 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import NavLinks from "@/components/nav-links";
-import { Button } from "@/components/ui/button";
 
-interface FieldState {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-const initialState: FieldState = {
-  name: "",
-  email: "",
-  subject: "",
-  message: "",
-};
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ContactPage() {
-  const [fields, setFields] = useState<FieldState>(initialState);
+  const [fields, setFields] = useState(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const update =
-    (key: keyof FieldState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFields((f) => ({ ...f, [key]: e.target.value }));
-    };
+  const update = (name: keyof typeof initialState) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setFields((prev: typeof initialState) => ({ ...prev, [name]: e.target.value }));
 
   const validEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -37,7 +20,7 @@ export default function ContactPage() {
     if (!fields.name || !fields.email || !fields.message) return;
     if (!validEmail(fields.email)) return;
     setSubmitting(true);
-    
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -53,7 +36,6 @@ export default function ContactPage() {
       } else {
         const data = await res.json();
         console.error("Failed to send message:", data);
-        // Optionally handle error state specifically here
       }
     } catch (error) {
       console.error("Error submitting form", error);
@@ -163,8 +145,8 @@ export default function ContactPage() {
                     {submitting
                       ? "Sending..."
                       : sent
-                      ? "Message Sent"
-                      : "Send Message"}
+                        ? "Message Sent"
+                        : "Send Message"}
                   </button>
                   {sent && (
                     <p className="text-sm text-green-600 text-center">
@@ -180,6 +162,29 @@ export default function ContactPage() {
     </main>
   );
 }
+
+const initialState = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
+
+function NavLinks() {
+  return (
+    <div className="hidden md:flex items-center space-x-8">
+      <Link href="/about" className="text-sm font-medium hover:text-sky-500 transition-colors">
+        About
+      </Link>
+      <Link href="/contact" className="text-sm font-medium hover:text-sky-500 transition-colors">
+        Contact
+      </Link>
+    </div>
+  );
+}
+
+import Link from "next/link";
+import { useState } from "react";
 
 interface ContactItemProps {
   icon: React.ReactNode;
@@ -216,9 +221,8 @@ function Input({ label, invalid, ...rest }: InputProps) {
         aria-label={label}
         placeholder={label}
         {...rest}
-        className={`w-full rounded-lg bg-white/70 px-4 py-3.5 text-sm md:text-base outline-none ring-1 ring-transparent focus:ring-sky-400 transition touch-manipulation ${
-          invalid ? "border border-red-400" : "border border-white/40"
-        }`}
+        className={`w-full rounded-lg bg-white/70 px-4 py-3.5 text-sm md:text-base outline-none ring-1 ring-transparent focus:ring-sky-400 transition touch-manipulation ${invalid ? "border border-red-400" : "border border-white/40"
+          }`}
       />
       {invalid && <p className="text-xs text-red-500">Enter a valid email.</p>}
     </div>

@@ -22,30 +22,40 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Beneficiary Name*</label>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={data.beneficiaryName}
                             onChange={(e) => updateData({ beneficiaryName: e.target.value })}
-                            placeholder="Beneficiary Name" 
-                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                            placeholder="Beneficiary Name"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Account Number*</label>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={data.accountNumber}
                             onChange={(e) => updateData({ accountNumber: e.target.value })}
-                            placeholder="Account Number" 
-                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400" 
+                            placeholder="Account Number"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                         />
                     </div>
 
                     <div className="space-y-2">
+                        <label className="block text-sm font-medium text-slate-700">Account Holder Phone*</label>
+                        <input
+                            type="tel"
+                            value={data.accountHolderPhone}
+                            onChange={(e) => updateData({ accountHolderPhone: e.target.value })}
+                            placeholder="Enter Phone Number"
+                            className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                        />            </div>
+
+                    <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Bank Name*</label>
                         <div className="relative">
-                            <select 
+                            <select
                                 value={data.bankName}
                                 onChange={(e) => updateData({ bankName: e.target.value })}
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none"
@@ -85,7 +95,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Branch Name*</label>
                         <div className="relative">
-                            <select 
+                            <select
                                 value={data.branchName}
                                 onChange={(e) => updateData({ branchName: e.target.value })}
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none"

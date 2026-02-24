@@ -1,85 +1,78 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-// Removed unused lucide-react icons after replacing download buttons.
-import { FaGooglePlay, FaApple, FaAppStore } from "react-icons/fa";
-import NavLinks from "@/components/nav-links";
+import PageLayout from "@/components/page-layout";
+import { ScrollerProvider, useScroller } from "@/context/scroller-context";
+import HeroSection from "@/components/sections/hero-section";
+import FeaturesSection from "@/components/sections/features-section";
+import AboutSection from "@/components/sections/about-section";
+import PartnersSection from "@/components/sections/partners-section";
+import ContactSection from "@/components/sections/contact-section";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+function MainScroller() {
+  const { scrollRef, handleKeyDown, activeIndex, totalItems, scrollTo } = useScroller();
+
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      {/* Left Arrow */}
+      {activeIndex > 0 && (
+        <button
+          onClick={() => scrollTo(activeIndex - 1)}
+          className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-sky-600/50 hover:text-sky-600 hover:bg-white/20 transition-all duration-300 shadow-xl shadow-sky-500/5 group"
+          aria-label="Previous page"
+        >
+          <ChevronLeft className="w-8 h-8 transition-transform group-hover:-translate-x-1" />
+        </button>
+      )}
+
+      {/* Right Arrow */}
+      {activeIndex < totalItems - 1 && (
+        <button
+          onClick={() => scrollTo(activeIndex + 1)}
+          className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-50 p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-sky-600/50 hover:text-sky-600 hover:bg-white/20 transition-all duration-300 shadow-xl shadow-sky-500/5 group"
+          aria-label="Next page"
+        >
+          <ChevronRight className="w-8 h-8 transition-transform group-hover:translate-x-1" />
+        </button>
+      )}
+
+      <div
+        ref={scrollRef}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        className="h-full w-full flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar focus:outline-none"
+      >
+        <section data-card className="min-w-full h-full snap-center overflow-hidden">
+          <HeroSection />
+        </section>
+        <section data-card className="min-w-full h-full snap-center overflow-hidden">
+          <FeaturesSection />
+        </section>
+        <section data-card className="min-w-full h-full snap-center overflow-hidden">
+          <AboutSection />
+        </section>
+        <section data-card className="min-w-full h-full snap-center overflow-hidden">
+          <PartnersSection />
+        </section>
+        <section data-card className="min-w-full h-full snap-center overflow-hidden">
+          <ContactSection />
+        </section>
+      </div>
+    </div>
+  );
+}
+
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main
-      className="min-h-screen relative overflow-hidden"
-      style={{
-        backgroundImage: "url(/background.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="relative z-10">
-        <nav className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Link href="/" className="text-3xl font-bold">
-              Wash<span className="text-sky-500">L</span>i
-            </Link>
-          </div>
-
-          <NavLinks />
-
-          {/* Spacer to preserve navbar alignment on desktop */}
-          <div className="hidden md:block min-w-[120px] md:min-w-[140px]" aria-hidden="true" />
-        </nav>
-
-        <section className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-                  Making Your
-                  <br />
-                  Laundry Smart
-                </h2>
-                <p className="text-base sm:text-lg text-gray-1000 leading-relaxed max-w-xl">
-                  Revolutionizing everyday laundry with AI-powered convenience -
-                  connecting you to nearby laundries, predicting delivery times,
-                  and keeping your clothes fresh effortlessly.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-                {/* Google Play Button */}
-                <Button className="bg-sky-300 hover:bg-sky-400 text-black font-bold px-6 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] w-full sm:w-auto min-h-[56px]">
-                  <span className="flex items-center justify-center text-black font-bold hover:text-black">
-                    Download Now <FaGooglePlay className="ml-3 h-5 w-5" />
-                  </span>
-                </Button>
-
-                {/* Apple App Store Button */}
-                <Button className="bg-black hover:bg-gray-900 text-white font-bold px-6 py-6 rounded-[25px] shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] w-full sm:w-auto min-h-[56px]">
-                  <span className="flex items-center justify-center">
-                    Download Now <FaAppStore className="ml-3 h-5 w-5" />
-                  </span>
-                </Button>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative w-full max-w-2xl mx-auto md:translate-x-4 lg:translate-x-18">
-                <Image
-                  src="/iphone.png"
-                  alt="WashLi App Interface"
-                  width={800}
-                  height={600}
-                  className="relative z-10 w-full h-auto drop-shadow-2xl"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
+    <Suspense fallback={<div className="h-screen w-full bg-sky-50 animate-pulse" />}>
+      <ScrollerProvider>
+        <PageLayout showFooter={false}>
+          <MainScroller />
+        </PageLayout>
+      </ScrollerProvider>
+    </Suspense>
   );
 }

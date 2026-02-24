@@ -30,6 +30,7 @@ export interface SignUpFormData {
     businessRegistered: boolean;
     parentName: string;
     brNumber: string;
+    brPhoneNumber: string;
     brDocument: string; // File path/name or placeholder
     taxRegistered: boolean;
     tinNumber: string;
@@ -43,11 +44,12 @@ export interface SignUpFormData {
     // Step 4: Menu Info
     menuDocument: string;
     outletLogo: string;
-    hasImages: string; // "Yes" | "No"
+    hasImages: "Yes" | "No"; // "Yes" | "No"
     itemImages: string;
 
     // Step 5: Bank Details
     beneficiaryName: string;
+    accountHolderPhone: string;
     accountNumber: string;
     bankName: string;
     branchName: string;
@@ -89,6 +91,7 @@ export const initialFormData: SignUpFormData = {
     businessRegistered: false,
     parentName: "",
     brNumber: "",
+    brPhoneNumber: "",
     brDocument: "",
     taxRegistered: false,
     tinNumber: "",
@@ -107,6 +110,7 @@ export const initialFormData: SignUpFormData = {
 
     // Step 5
     beneficiaryName: "",
+    accountHolderPhone: "",
     accountNumber: "",
     bankName: "",
     branchName: "",

@@ -40,7 +40,6 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
         setCaptchaValue(generateCaptcha());
         setCaptchaInput("");
     };
-    
     // OTP State (Transient)
     const [otpSent, setOtpSent] = useState(false);
     const [verificationCode, setVerificationCode] = useState("");
@@ -183,6 +182,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                             />
                                             <button
                                                 type="button"
+                                                onClick={handleSendOTP}
                                                 disabled={timer > 0}
                                                 className={`px-4 py-3 bg-sky-500 text-white font-medium rounded-lg transition-colors whitespace-nowrap text-sm ${timer > 0 ? 'opacity-80 cursor-not-allowed' : 'hover:bg-sky-600'}`}
                                             >
@@ -196,17 +196,17 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                         <div className="flex gap-2">
                                             <div className="relative flex-1">
                                                 <input
-                                                type="text"
-                                                value={verificationCode}
-                                                onChange={(e) => {
-                                                    const value = e.target.value;
-                                                    if (/^\d{0,6}$/.test(value)) {
-                                                        setVerificationCode(value);
-                                                    }
-                                                }}
-                                                placeholder="Verification Code"
-                                                className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
-                                            />
+                                                    type="text"
+                                                    value={verificationCode}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        if (/^\d{0,6}$/.test(value)) {
+                                                            setVerificationCode(value);
+                                                        }
+                                                    }}
+                                                    placeholder="Verification Code"
+                                                    className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                                                />
                                                 <Lock className="absolute left-3 top-3.5 text-slate-400" size={18} />
                                             </div>
                                             <button
@@ -271,6 +271,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
 
                         {/* Grid for other fields */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+
                             <div className="hidden md:block"></div>
 
                             <div className="space-y-2">
@@ -328,7 +329,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                 <label className="block text-sm font-medium text-slate-700">Phone Number*</label>
                                 <div className="relative">
                                     <input
-                                        type="text"
+                                        type="tel"
                                         value={data.phoneNumber}
                                         onChange={(e) => updateData({ phoneNumber: e.target.value })}
                                         placeholder="Enter Phone Number"

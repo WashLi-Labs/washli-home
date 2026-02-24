@@ -63,7 +63,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         <div className="relative max-w-md">
                             <select
                                 value={data.hasImages}
-                                onChange={(e) => updateData({ hasImages: e.target.value })}
+                                onChange={(e) => updateData({ hasImages: e.target.value as "Yes" | "No" })}
                                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 text-slate-600 appearance-none"
                             >
                                 <option value="No">No</option>
@@ -78,12 +78,12 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                             <label className="block text-sm text-slate-600 flex items-center">
                                 Upload Images* <HelpCircle size={14} className="ml-1 text-slate-400" />
                             </label>
-                             <div className="max-w-md">
+                            <div className="max-w-md">
                                 <FileUploadInput
                                     value={data.itemImages}
                                     onFileSelect={(fileName) => updateData({ itemImages: fileName })}
                                 />
-                             </div>
+                            </div>
                         </div>
                     )}
 
