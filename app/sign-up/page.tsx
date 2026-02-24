@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Sidebar } from "./components/Sidebar";
 
 import { Step1MerchantSignup } from "./components/Step1MerchantSignup";
@@ -12,8 +14,23 @@ import { Step6Summary } from "./components/Step6Summary";
 import { SignUpFormData, initialFormData } from "./types";
 import PageLayout from "@/components/page-layout";
 import Header from "@/components/header";
+import { API_BASE_URL, MERCHANT_REGISTER_ENDPOINT } from "@/lib/config";
+
+// Placeholder components for steps
+
+const StepPlaceholder = ({ step, onNext, onPrev }: { step: number; onNext: () => void; onPrev: () => void }) => (
+    <div className="space-y-4">
+        <h2 className="text-xl font-bold">Step {step}</h2>
+        <p>Placeholder content for step {step}.</p>
+        <div className="flex gap-4 mt-4">
+            <button onClick={onPrev} className="px-4 py-2 bg-gray-200 rounded-lg">Prev</button>
+            <button onClick={onNext} className="px-4 py-2 bg-yellow-400 rounded-lg">Next</button>
+        </div>
+    </div>
+);
 
 export default function SignUpPage() {
+    const router = useRouter();
     const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState<SignUpFormData>(initialFormData);
 
@@ -23,6 +40,38 @@ export default function SignUpPage() {
 
     const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6));
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleFormSubmit = async () => {
+        setIsSubmitting(true);
+        try {
+            const { ...payload } = formData;
+            const response = await fetch(`${API_BASE_URL}${MERCHANT_REGISTER_ENDPOINT}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || "Registration failed");
+            }
+
+            const responseData = await response.json();
+            console.log("Registration Success:", responseData);
+            alert("Registration Submitted Successfully! Welcome aboard.");
+            router.push("/sign-up"); // Navigate to root partner page
+        } catch (error: any) {
+            console.error("Registration Error:", error);
+            alert(`Error: ${error.message || "Something went wrong"}`);
+            // Stay on the page (no navigation)
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <PageLayout showHeader={false} showFooter={false}>
@@ -80,18 +129,16 @@ export default function SignUpPage() {
                             {currentStep === 6 && (
                                 <Step6Summary
                                     onPrev={prevStep}
-                                    onSubmit={() => {
-                                        console.log("Form Data Submitted:", formData);
-                                        alert("Registration Submitted Successfully!");
-                                    }}
+                                    onSubmit={handleFormSubmit}
                                     data={formData}
                                     onGoToStep={setCurrentStep}
                                 />
                             )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </PageLayout>
+
+                        </div >
+                    </div >
+                </div >
+            </div >
+        </PageLayout >
     );
 }

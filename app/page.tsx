@@ -63,12 +63,16 @@ function MainScroller() {
   );
 }
 
+import { Suspense } from "react";
+
 export default function Home() {
   return (
-    <ScrollerProvider>
-      <PageLayout showFooter={false}>
-        <MainScroller />
-      </PageLayout>
-    </ScrollerProvider>
+    <Suspense fallback={<div className="h-screen w-full bg-sky-50 animate-pulse" />}>
+      <ScrollerProvider>
+        <PageLayout showFooter={false}>
+          <MainScroller />
+        </PageLayout>
+      </ScrollerProvider>
+    </Suspense>
   );
 }

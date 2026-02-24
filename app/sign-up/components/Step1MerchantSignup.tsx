@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+// ...existing imports...
+
+// Helper to generate a 6-digit OTP
+function generateOTP() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
 import { Check, Info, Phone, MapPin, ArrowRight, ChevronDown, RefreshCw, Lock } from "lucide-react";
 import { LocationPickerModal } from "./LocationPickerModal";
 import { SignUpFormData } from "../types";
@@ -10,27 +16,36 @@ interface Step1Props {
 }
 
 export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, updateData }) => {
+
+    // Helper to generate random captcha
+    const generateCaptcha = () => {
+        const chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        let captcha = "";
+        for (let i = 0; i < 6; i++) {
+            captcha += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return captcha;
+    };
+
     // Captcha State (Transient)
     const [captchaValue, setCaptchaValue] = useState("");
     const [captchaInput, setCaptchaInput] = useState("");
 
-    const generateCaptcha = () => {
-        const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        let result = "";
-        for (let i = 0; i < 4; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        setCaptchaValue(result);
-    };
-
+    // Initialize captcha on mount
     useEffect(() => {
-        generateCaptcha();
+        setCaptchaValue(generateCaptcha());
     }, []);
 
+    const handleRefreshCaptcha = () => {
+        setCaptchaValue(generateCaptcha());
+        setCaptchaInput("");
+    };
     // OTP State (Transient)
     const [otpSent, setOtpSent] = useState(false);
     const [verificationCode, setVerificationCode] = useState("");
     const [timer, setTimer] = useState(59);
+    const [serverOTP, setServerOTP] = useState("");
+    const [sending, setSending] = useState(false);
 
     // Form State (UI specific)
     const [isLocationPickerOpen, setIsLocationPickerOpen] = useState(false);
@@ -45,7 +60,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
         return () => clearInterval(interval);
     }, [otpSent, timer]);
 
-    const handleSendOTP = () => {
+    const handleSendOTP = async () => {
         if (captchaInput.toLowerCase() !== captchaValue.toLowerCase()) {
             alert("Invalid Captcha");
             return;
@@ -54,16 +69,38 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
             alert("Please enter email");
             return;
         }
-        setOtpSent(true);
-        setTimer(59);
+        const otp = generateOTP();
+        setSending(true);
+        try {
+            const res = await fetch("/api/send-otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: data.email, otp }),
+            });
+            if (res.ok) {
+                setOtpSent(true);
+                setTimer(59);
+                setServerOTP(otp);
+                alert("OTP sent to your email.");
+            } else {
+                alert("Failed to send OTP. Please try again.");
+            }
+        } catch (err) {
+            alert("Error sending OTP. Please try again.");
+        } finally {
+            setSending(false);
+        }
     };
 
     const handleVerify = () => {
-        // Mock verification
-        if (verificationCode) {
+        if (!verificationCode) {
+            alert("Please enter verification code");
+            return;
+        }
+        if (verificationCode === serverOTP) {
             updateData({ isEmailVerified: true });
         } else {
-            alert("Please enter verification code");
+            alert("Invalid OTP. Please check your email and try again.");
         }
     };
 
@@ -72,6 +109,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
         updateData({ isEmailVerified: false, email: "" });
         setCaptchaInput("");
         setVerificationCode("");
+        setCaptchaValue(generateCaptcha()); // Refresh captcha on email change
     };
 
     return (
@@ -92,7 +130,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                 <div className="bg-slate-100 px-6 py-3 rounded-lg select-none font-mono text-xl tracking-widest text-slate-500 line-through decoration-pink-500 decoration-2 italic font-bold border border-slate-200" style={{ letterSpacing: '0.5em', background: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxwYXRoIGQ9Ik0wIDUwTDUwIDAiIHN0cm9rZT0iI2RiZNWNlIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+') opacity-50" }}>
                                     {captchaValue}
                                 </div>
-                                <button type="button" onClick={generateCaptcha} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                                <button type="button" onClick={handleRefreshCaptcha} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
                                     <RefreshCw size={20} className="text-slate-600" />
                                 </button>
                             </div>
@@ -115,7 +153,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                             type="email"
                                             value={data.email}
                                             onChange={(e) => updateData({ email: e.target.value })}
-                                            placeholder="your email "
+                                            placeholder="your_mail@gmail.com"
                                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
                                         />
                                     </div>
@@ -123,8 +161,9 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                         type="button"
                                         onClick={handleSendOTP}
                                         className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
+                                        disabled={sending}
                                     >
-                                        Send OTP
+                                        {sending ? "Sending..." : "Send OTP"}
                                     </button>
                                 </div>
                             </div>
@@ -159,7 +198,12 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                                 <input
                                                     type="text"
                                                     value={verificationCode}
-                                                    onChange={(e) => setVerificationCode(e.target.value)}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        if (/^\d{0,6}$/.test(value)) {
+                                                            setVerificationCode(value);
+                                                        }
+                                                    }}
                                                     placeholder="Verification Code"
                                                     className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
                                                 />
@@ -227,22 +271,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
 
                         {/* Grid for other fields */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                            <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700">Region*</label>
-                                <div className="relative">
-                                    <select
-                                        value={data.region}
-                                        onChange={(e) => updateData({ region: e.target.value })}
-                                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 appearance-none"
-                                    >
-                                        <option value="" disabled>Select Region</option>
-                                        <option>Embilipitiya</option>
-                                        <option>Colombo</option>
-                                        <option>Kandy</option>
-                                    </select>
-                                    <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
-                                </div>
-                            </div>
+
                             <div className="hidden md:block"></div>
 
                             <div className="space-y-2">

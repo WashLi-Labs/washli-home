@@ -9,7 +9,6 @@ export interface SignUpFormData {
     // Step 1: Merchant Signup
     email: string;
     howDidYouHear: string;
-    region: string;
     merchantType: string;
     outletName: string;
     outletAddress: string;
@@ -71,7 +70,6 @@ export const initialFormData: SignUpFormData = {
     // Step 1
     email: "",
     howDidYouHear: "",
-    region: "",
     merchantType: "",
     outletName: "",
     outletAddress: "",

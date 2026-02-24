@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full overflow-hidden">
-      <body className={`${poppins.className} bg-background text-foreground h-full overflow-hidden`}>
+    <html lang="en" suppressHydrationWarning className="h-full">
+      <body className={`${poppins.className} bg-background text-foreground h-full`}>
         {children}
       </body>
     </html>
