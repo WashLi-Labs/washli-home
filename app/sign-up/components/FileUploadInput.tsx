@@ -34,7 +34,7 @@ export const FileUploadInput: React.FC<FileUploadInputProps> = ({ value, onFileS
                 placeholder={placeholder}
                 value={value ? (value.startsWith("data:") ? "File Selected" : value) : ""}
                 readOnly
-                className="flex-1 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
+                className="flex-1 min-w-0 px-4 py-3 bg-white text-sm text-slate-500 focus:outline-none"
             />
             <input
                 type="file"
@@ -45,7 +45,7 @@ export const FileUploadInput: React.FC<FileUploadInputProps> = ({ value, onFileS
             <button
                 type="button"
                 onClick={handleButtonClick}
-                className="px-6 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors whitespace-nowrap"
+                className="px-4 py-3 bg-sky-500 hover:bg-sky-600 font-medium text-white text-sm flex items-center transition-colors whitespace-nowrap flex-shrink-0"
             >
                 <Upload size={16} className="mr-2" />
                 Upload

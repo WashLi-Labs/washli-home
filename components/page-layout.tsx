@@ -8,16 +8,18 @@ interface PageLayoutProps {
     showBlurBackground?: boolean;
     showHeader?: boolean;
     showFooter?: boolean;
+    allowScroll?: boolean;
 }
 
 export default function PageLayout({
     children,
     showBlurBackground = true,
     showHeader = true,
-    showFooter = true
+    showFooter = true,
+    allowScroll = false
 }: PageLayoutProps) {
     return (
-        <main className="h-screen w-full relative overflow-hidden flex flex-col">
+        <main className={`w-full relative flex flex-col ${allowScroll ? 'min-h-screen' : 'h-screen overflow-hidden'}`}>
             {/* Shared Background logic */}
             {showBlurBackground && (
                 <>
@@ -29,9 +31,9 @@ export default function PageLayout({
                 </>
             )}
 
-            <div className="relative z-10 w-full flex flex-col h-full overflow-hidden">
+            <div className={`relative z-10 w-full flex flex-col ${allowScroll ? 'min-h-screen' : 'h-screen overflow-hidden'}`}>
                 {showHeader && <Header />}
-                <div className="flex-1 overflow-y-hidden">
+                <div className={`flex-1 ${allowScroll ? 'overflow-y-visible' : 'overflow-y-hidden'}`}>
                     {children}
                 </div>
                 {showFooter && (

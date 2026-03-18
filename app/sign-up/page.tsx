@@ -74,7 +74,7 @@ export default function SignUpPage() {
     };
 
     return (
-        <PageLayout showHeader={false} showFooter={false}>
+        <PageLayout showHeader={false} showFooter={false} allowScroll={true}>
             {/* Centered Top Header for focused flow */}
             <Header centered />
 
