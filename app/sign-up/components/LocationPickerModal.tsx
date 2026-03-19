@@ -30,6 +30,7 @@ export const LocationPickerModal: React.FC<LocationPickerModalProps> = ({ isOpen
     const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+        mapIds: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID ? [process.env.NEXT_PUBLIC_GOOGLE_MAP_ID] : [],
         libraries
     });
 
@@ -117,6 +118,7 @@ export const LocationPickerModal: React.FC<LocationPickerModalProps> = ({ isOpen
                                 streetViewControl: false,
                                 mapTypeControl: true,
                                 fullscreenControl: true,
+                                mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || undefined,
                             }}
                         >
                             <Marker

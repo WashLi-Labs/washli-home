@@ -1,16 +1,18 @@
 import React from "react";
 import { ArrowLeft, ArrowRight, Download, HelpCircle, ChevronDown } from "lucide-react";
-import { SignUpFormData } from "../types";
+import { SignUpFormData, FormErrors } from "../types";
 import { FileUploadInput } from "./FileUploadInput";
+import { ErrorField } from "./ErrorField";
 
 interface Step4Props {
     onNext: () => void;
     onPrev: () => void;
     data: SignUpFormData;
     updateData: (updates: Partial<SignUpFormData>) => void;
+    errors: FormErrors;
 }
 
-export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, updateData }) => {
+export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, updateData, errors }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -25,9 +27,13 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                     {/* Template Download */}
                     <div className="bg-sky-50 border border-sky-100 rounded-lg p-4 flex items-center justify-between">
                         <span className="text-sm font-medium text-slate-800">Click Here to Download Template - WashLi Laundry Services</span>
-                        <button type="button" className="p-2 bg-sky-500 hover:bg-sky-600 rounded-full text-white transition-colors">
+                        <a
+                            href="/Template - WashLi Laundry Services.xlsx"
+                            download="Template - WashLi Laundry Services.xlsx"
+                            className="p-2 bg-sky-500 hover:bg-sky-600 rounded-full text-white transition-colors"
+                        >
                             <Download size={18} />
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -39,8 +45,10 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         </label>
                         <FileUploadInput
                             value={data.menuDocument}
-                            onFileSelect={(fileName) => updateData({ menuDocument: fileName })}
+                            fileName={data.menuDocumentName}
+                            onFileSelect={(base64, fileName) => updateData({ menuDocument: base64, menuDocumentName: fileName })}
                         />
+                        <ErrorField error={errors.menuDocument} />
                     </div>
 
                     <div className="space-y-2">
@@ -49,8 +57,10 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         </label>
                         <FileUploadInput
                             value={data.outletLogo}
-                            onFileSelect={(fileName) => updateData({ outletLogo: fileName })}
+                            fileName={data.outletLogoName}
+                            onFileSelect={(base64, fileName) => updateData({ outletLogo: base64, outletLogoName: fileName })}
                         />
+                        <ErrorField error={errors.outletLogo} />
                     </div>
                 </div>
 
@@ -71,6 +81,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                             </select>
                             <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                         </div>
+                        <ErrorField error={errors.hasImages} />
                     </div>
 
                     {data.hasImages === "Yes" && (
@@ -81,8 +92,10 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                             <div className="max-w-md">
                                 <FileUploadInput
                                     value={data.itemImages}
-                                    onFileSelect={(fileName) => updateData({ itemImages: fileName })}
+                                    fileName={data.itemImagesName}
+                                    onFileSelect={(base64, fileName) => updateData({ itemImages: base64, itemImagesName: fileName })}
                                 />
+                                <ErrorField error={errors.itemImages} />
                             </div>
                         </div>
                     )}

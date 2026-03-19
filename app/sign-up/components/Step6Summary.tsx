@@ -1,25 +1,29 @@
 import React from "react";
 import { ArrowLeft, Edit2, FileText } from "lucide-react";
-import { SignUpFormData, OperatingHour } from "../types";
+import { SignUpFormData, OperatingHour, FormErrors } from "../types";
+import { AlertCircle } from "lucide-react";
 
 interface Step6Props {
     onPrev: () => void;
     onSubmit: () => void;
     data: SignUpFormData;
     onGoToStep?: (step: number) => void;
+    errors: FormErrors;
+    isSubmitting: boolean;
 }
 
-export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onGoToStep }) => {
+export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onGoToStep, errors, isSubmitting }) => {
 
     const formatTime = (time: string) => time || "N/A";
     const formatBool = (val: boolean) => val ? "Yes" : "No";
 
-    const renderValue = (value: string | undefined | null) => {
+    const renderValue = (value: string | undefined | null, fileName?: string) => {
         if (!value) return "N/A";
         if (typeof value === 'string') {
             if (value.startsWith("data:image")) {
                 return (
-                    <div className="mt-1">
+                    <div className="mt-1 space-y-2">
+                        {fileName && <p className="text-xs text-slate-500 font-medium">{fileName}</p>}
                         <img
                             src={value}
                             alt="Preview"
@@ -28,14 +32,14 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                     </div>
                 );
             }
-            if (value.startsWith("data:application/pdf")) {
+            if (value.startsWith("data:application/pdf") || value.startsWith("data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") || value.startsWith("data:application/vnd.ms-excel")) {
                 return (
                     <div className="mt-1 flex items-center space-x-2 p-2 bg-slate-100 rounded border border-slate-200 w-fit">
                         <FileText size={20} className="text-slate-500" />
-                        <span className="text-slate-600 text-sm font-medium">PDF Document</span>
+                        <span className="text-slate-600 text-sm font-medium">{fileName || "Document"}</span>
                         <a
                             href={value}
-                            download="document.pdf"
+                            download={fileName || "document"}
                             className="text-sky-600 text-xs font-medium hover:underline ml-2"
                         >
                             Download
@@ -44,8 +48,8 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                 );
             }
         }
-        if (value.length > 50) return <span title={value} className="break-all">{value.substring(0, 50)}...</span>;
-        return <span className="break-all">{value}</span>;
+        if (value.length > 50) return <span title={value} className="break-all">{fileName || (value.substring(0, 50) + "...")}</span>;
+        return <span className="break-all">{fileName || value}</span>;
     };
 
     return (
@@ -194,7 +198,7 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                                 </div>
                                 <div>
                                     <p className="text-slate-500 mb-1">BR Document</p>
-                                    <div className="font-medium text-slate-800">{renderValue(data.brDocument)}</div>
+                                    <div className="font-medium text-slate-800">{renderValue(data.brDocument, data.brDocumentName)}</div>
                                 </div>
                             </>
                         )}
@@ -210,11 +214,11 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                                 </div>
                                 <div>
                                     <p className="text-slate-500 mb-1">Tax Certificate*</p>
-                                    <div className="font-medium text-slate-800">{renderValue(data.taxCertificate)}</div>
+                                    <div className="font-medium text-slate-800">{renderValue(data.taxCertificate, data.taxCertificateName)}</div>
                                 </div>
                                 <div>
                                     <p className="text-slate-500 mb-1">TDL</p>
-                                    <div className="font-medium text-slate-800">{renderValue(data.tdlDocument)}</div>
+                                    <div className="font-medium text-slate-800">{renderValue(data.tdlDocument, data.tdlDocumentName)}</div>
                                 </div>
                             </>
                         )}
@@ -230,11 +234,11 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                         )}
                         <div>
                             <p className="text-slate-500 mb-1">NIC Front</p>
-                            <div className="font-medium text-slate-800">{renderValue(data.nicFront)}</div>
+                            <div className="font-medium text-slate-800">{renderValue(data.nicFront, data.nicFrontName)}</div>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">NIC Back</p>
-                            <div className="font-medium text-slate-800">{renderValue(data.nicBack)}</div>
+                            <div className="font-medium text-slate-800">{renderValue(data.nicBack, data.nicBackName)}</div>
                         </div>
                     </div>
                 </div>
@@ -254,11 +258,11 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
                         <div>
                             <p className="text-slate-500 mb-1">Menu*</p>
-                            <div className="font-medium text-slate-800">{renderValue(data.menuDocument)}</div>
+                            <div className="font-medium text-slate-800">{renderValue(data.menuDocument, data.menuDocumentName)}</div>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Outlet Logo*</p>
-                            <div className="font-medium text-slate-800">{renderValue(data.outletLogo)}</div>
+                            <div className="font-medium text-slate-800">{renderValue(data.outletLogo, data.outletLogoName)}</div>
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Do you have images you can provide?</p>
@@ -267,7 +271,7 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                         {data.hasImages === 'Yes' && (
                             <div>
                                 <p className="text-slate-500 mb-1">Upload Images</p>
-                                <div className="font-medium text-slate-800">{renderValue(data.itemImages)}</div>
+                                <div className="font-medium text-slate-800">{renderValue(data.itemImages, data.itemImagesName)}</div>
                             </div>
                         )}
                     </div>
@@ -308,7 +312,7 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                         </div>
                         <div>
                             <p className="text-slate-500 mb-1">Soft Copy of the Bank Statement Or Passbook*</p>
-                            <div className="font-medium text-slate-800">{renderValue(data.bankStatement)}</div>
+                            <div className="font-medium text-slate-800">{renderValue(data.bankStatement, data.bankStatementName)}</div>
                         </div>
                     </div>
                 </div>
@@ -329,11 +333,24 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                 <button
                     type="button"
                     onClick={onSubmit}
-                    className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md flex items-center"
+                    disabled={isSubmitting}
+                    className={`px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-md flex items-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
-                    Submit
+                    {isSubmitting ? (
+                        <>
+                            <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
+                            Submitting...
+                        </>
+                    ) : 'Submit'}
                 </button>
             </div>
+
+            {Object.keys(errors).length > 0 && (
+                <div className="p-4 bg-pink-50 border border-pink-100 rounded-lg flex items-center gap-3 text-pink-600 animate-shake">
+                    <AlertCircle size={20} className="shrink-0" />
+                    <p className="text-sm font-medium">Please fix the errors in the previous steps before submitting.</p>
+                </div>
+            )}
         </div>
     );
 };

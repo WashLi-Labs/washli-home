@@ -1,15 +1,17 @@
 import React from "react";
 import { ArrowLeft, ArrowRight, Clock, Mail, Phone } from "lucide-react";
-import { SignUpFormData, OperatingHour } from "../types";
+import { SignUpFormData, OperatingHour, FormErrors } from "../types";
+import { ErrorField } from "./ErrorField";
 
 interface Step2Props {
     onNext: () => void;
     onPrev: () => void;
     data: SignUpFormData;
     updateData: (updates: Partial<SignUpFormData>) => void;
+    errors: FormErrors;
 }
 
-export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, updateData }) => {
+export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, updateData, errors }) => {
     const handleHourChange = (index: number, field: keyof OperatingHour, value: string | boolean) => {
         const newHours = [...data.operatingHours];
         newHours[index] = { ...newHours[index], [field]: value };
@@ -37,6 +39,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                     placeholder="Enter Owner Name"
                                     className="w-full pl-4 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.ownerName} />
                             </div>
                         </div>
 
@@ -52,6 +55,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                 />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
+                            <ErrorField error={errors.ownerPhone} />
                         </div>
                     </div>
 
@@ -68,6 +72,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                 />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
+                            <ErrorField error={errors.ownerEmail} />
                         </div>
                     </div>
 
@@ -83,6 +88,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                     placeholder="Enter Manager Name"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.managerName} />
                             </div>
                         </div>
 
@@ -98,6 +104,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                 />
                                 <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
+                            <ErrorField error={errors.managerPhone} />
                         </div>
                     </div>
 
@@ -115,6 +122,7 @@ export const Step2ContactInfo: React.FC<Step2Props> = ({ onNext, onPrev, data, u
                                 />
                                 <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                             </div>
+                            <ErrorField error={errors.managerEmail} />
                         </div>
                     </div>
                 </div>

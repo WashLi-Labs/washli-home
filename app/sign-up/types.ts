@@ -5,6 +5,17 @@ export interface OperatingHour {
     closeTime: string;
 }
 
+export interface ApiError {
+    type: string;
+    loc: (string | number)[];
+    msg: string;
+    input: any;
+    ctx?: any;
+    url?: string;
+}
+
+export type FormErrors = { [K in keyof SignUpFormData]?: string } & { [key: string]: string };
+
 export interface SignUpFormData {
     // Step 1: Merchant Signup
     email: string;
@@ -32,20 +43,28 @@ export interface SignUpFormData {
     brNumber: string;
     brPhoneNumber: string;
     brDocument: string; // File path/name or placeholder
+    brDocumentName: string;
     taxRegistered: boolean;
     tinNumber: string;
     taxCertificate: string;
+    taxCertificateName: string;
     tdlDocument: string;
+    tdlDocumentName: string;
     vatRegistered: boolean;
     vatNumber: string;
     nicFront: string;
+    nicFrontName: string;
     nicBack: string;
+    nicBackName: string;
 
     // Step 4: Menu Info
     menuDocument: string;
+    menuDocumentName: string;
     outletLogo: string;
+    outletLogoName: string;
     hasImages: "Yes" | "No"; // "Yes" | "No"
     itemImages: string;
+    itemImagesName: string;
 
     // Step 5: Bank Details
     beneficiaryName: string;
@@ -55,6 +74,7 @@ export interface SignUpFormData {
     branchName: string;
     branchCode: string;
     bankStatement: string;
+    bankStatementName: string;
 }
 
 export const initialOperatingHours: OperatingHour[] = [
@@ -93,20 +113,28 @@ export const initialFormData: SignUpFormData = {
     brNumber: "",
     brPhoneNumber: "",
     brDocument: "",
+    brDocumentName: "",
     taxRegistered: false,
     tinNumber: "",
     taxCertificate: "",
+    taxCertificateName: "",
     tdlDocument: "",
+    tdlDocumentName: "",
     vatRegistered: false,
     vatNumber: "",
     nicFront: "",
+    nicFrontName: "",
     nicBack: "",
+    nicBackName: "",
 
     // Step 4
     menuDocument: "",
+    menuDocumentName: "",
     outletLogo: "",
+    outletLogoName: "",
     hasImages: "No",
     itemImages: "",
+    itemImagesName: "",
 
     // Step 5
     beneficiaryName: "",
@@ -116,4 +144,5 @@ export const initialFormData: SignUpFormData = {
     branchName: "",
     branchCode: "",
     bankStatement: "",
+    bankStatementName: "",
 };
