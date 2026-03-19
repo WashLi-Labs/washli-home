@@ -1,16 +1,18 @@
 import React from "react";
 import { ArrowLeft, ArrowRight, Upload, ChevronDown } from "lucide-react";
-import { SignUpFormData } from "../types";
+import { SignUpFormData, FormErrors } from "../types";
 import { FileUploadInput } from "./FileUploadInput";
+import { ErrorField } from "./ErrorField";
 
 interface Step5Props {
     onNext: () => void;
     onPrev: () => void;
     data: SignUpFormData;
     updateData: (updates: Partial<SignUpFormData>) => void;
+    errors: FormErrors;
 }
 
-export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, updateData }) => {
+export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, updateData, errors }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -29,6 +31,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             placeholder="Beneficiary Name"
                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                         />
+                        <ErrorField error={errors.beneficiaryName} />
                     </div>
 
                     <div className="space-y-2">
@@ -40,6 +43,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             placeholder="Account Number"
                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                         />
+                        <ErrorField error={errors.accountNumber} />
                     </div>
 
                     <div className="space-y-2">
@@ -50,7 +54,9 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             onChange={(e) => updateData({ accountHolderPhone: e.target.value })}
                             placeholder="Enter Phone Number"
                             className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
-                        />            </div>
+                        />
+                        <ErrorField error={errors.accountHolderPhone} />
+                    </div>
 
                     <div className="space-y-2">
                         <label className="block text-sm font-medium text-slate-700">Bank Name*</label>
@@ -90,6 +96,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             </select>
                             <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                         </div>
+                        <ErrorField error={errors.bankName} />
                     </div>
 
                     <div className="space-y-2">
@@ -194,6 +201,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             </select>
                             <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                         </div>
+                        <ErrorField error={errors.branchName} />
                     </div>
 
                     <div className="space-y-2 md:col-span-2">
@@ -201,8 +209,10 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                         <div className="max-w-md">
                             <FileUploadInput
                                 value={data.bankStatement}
-                                onFileSelect={(fileName) => updateData({ bankStatement: fileName })}
+                                fileName={data.bankStatementName}
+                                onFileSelect={(base64, fileName) => updateData({ bankStatement: base64, bankStatementName: fileName })}
                             />
+                            <ErrorField error={errors.bankStatement} />
                         </div>
                     </div>
                 </div>

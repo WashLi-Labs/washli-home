@@ -1,16 +1,18 @@
 import React from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { SignUpFormData } from "../types";
+import { SignUpFormData, FormErrors } from "../types";
 import { FileUploadInput } from "./FileUploadInput";
+import { ErrorField } from "./ErrorField";
 
 interface Step3Props {
     onNext: () => void;
     onPrev: () => void;
     data: SignUpFormData;
     updateData: (updates: Partial<SignUpFormData>) => void;
+    errors: FormErrors;
 }
 
-export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, updateData }) => {
+export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, updateData, errors }) => {
     return (
         <div className="animate-fade-in-up space-y-8">
             <div className="border-b border-slate-100 pb-4">
@@ -66,6 +68,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     placeholder="Parent name as per BR"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.parentName} />
                             </div>
 
                             <div className="space-y-2">
@@ -77,6 +80,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     placeholder="BR Number"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.brNumber} />
                             </div>
 
                             <div className="space-y-2">
@@ -88,6 +92,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     placeholder="Enter Business Phone"
                                     className="w-full pl-10 px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 font-mono"
                                 />
+                                <ErrorField error={errors.brPhoneNumber} />
                             </div>
 
                             <div className="space-y-2 md:col-span-2">
@@ -97,8 +102,10 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                 <div className="max-w-md">
                                     <FileUploadInput
                                         value={data.brDocument}
-                                        onFileSelect={(fileName) => updateData({ brDocument: fileName })}
+                                        fileName={data.brDocumentName}
+                                        onFileSelect={(base64, fileName) => updateData({ brDocument: base64, brDocumentName: fileName })}
                                     />
+                                    <ErrorField error={errors.brDocument} />
                                 </div>
                             </div>
                         </div>
@@ -139,6 +146,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     placeholder="Tin Number"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.tinNumber} />
                             </div>
 
                             <div className="space-y-2">
@@ -147,8 +155,10 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                 </label>
                                 <FileUploadInput
                                     value={data.taxCertificate}
-                                    onFileSelect={(fileName) => updateData({ taxCertificate: fileName })}
+                                    fileName={data.taxCertificateName}
+                                    onFileSelect={(base64, fileName) => updateData({ taxCertificate: base64, taxCertificateName: fileName })}
                                 />
+                                <ErrorField error={errors.taxCertificate} />
                             </div>
 
                             <div className="space-y-2">
@@ -157,8 +167,10 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                 </label>
                                 <FileUploadInput
                                     value={data.tdlDocument}
-                                    onFileSelect={(fileName) => updateData({ tdlDocument: fileName })}
+                                    fileName={data.tdlDocumentName}
+                                    onFileSelect={(base64, fileName) => updateData({ tdlDocument: base64, tdlDocumentName: fileName })}
                                 />
+                                <ErrorField error={errors.tdlDocument} />
                             </div>
                         </div>
                     )}
@@ -198,6 +210,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     placeholder="VAT Number"
                                     className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.vatNumber} />
                             </div>
                         </div>
                     )}
@@ -214,8 +227,10 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     <label className="block text-sm text-slate-600">Front*</label>
                                     <FileUploadInput
                                         value={data.nicFront}
-                                        onFileSelect={(fileName) => updateData({ nicFront: fileName })}
+                                        fileName={data.nicFrontName}
+                                        onFileSelect={(base64, fileName) => updateData({ nicFront: base64, nicFrontName: fileName })}
                                     />
+                                    <ErrorField error={errors.nicFront} />
                                 </div>
 
                                 {/* Back Upload */}
@@ -223,8 +238,10 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     <label className="block text-sm text-slate-600">Back*</label>
                                     <FileUploadInput
                                         value={data.nicBack}
-                                        onFileSelect={(fileName) => updateData({ nicBack: fileName })}
+                                        fileName={data.nicBackName}
+                                        onFileSelect={(base64, fileName) => updateData({ nicBack: base64, nicBackName: fileName })}
                                     />
+                                    <ErrorField error={errors.nicBack} />
                                 </div>
                             </div>
                         </div>

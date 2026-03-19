@@ -7,15 +7,17 @@ function generateOTP() {
 }
 import { Check, Info, Phone, MapPin, ArrowRight, ChevronDown, RefreshCw, Lock } from "lucide-react";
 import { LocationPickerModal } from "./LocationPickerModal";
-import { SignUpFormData } from "../types";
+import { SignUpFormData, FormErrors } from "../types";
+import { ErrorField } from "./ErrorField";
 
 interface Step1Props {
     onNext: () => void;
     data: SignUpFormData;
     updateData: (updates: Partial<SignUpFormData>) => void;
+    errors: FormErrors;
 }
 
-export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, updateData }) => {
+export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, updateData, errors }) => {
 
     // Helper to generate random captcha
     const generateCaptcha = () => {
@@ -156,6 +158,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                             placeholder="your_mail@gmail.com"
                                             className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-400"
                                         />
+                                        <ErrorField error={errors.email} />
                                     </div>
                                     <button
                                         type="button"
@@ -267,6 +270,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                 </select>
                                 <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                             </div>
+                            <ErrorField error={errors.howDidYouHear} />
                         </div>
 
                         {/* Grid for other fields */}
@@ -290,6 +294,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                     </select>
                                     <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                                 </div>
+                                <ErrorField error={errors.merchantType} />
                             </div>
 
                             <div className="space-y-2">
@@ -301,6 +306,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                     placeholder="Enter Outlet Name"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.outletName} />
                             </div>
 
                             <div className="space-y-2 md:col-span-2">
@@ -312,6 +318,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                     placeholder="Enter Outlet Address"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.outletAddress} />
                             </div>
 
                             <div className="space-y-2">
@@ -323,6 +330,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                     placeholder="Enter City"
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                                 />
+                                <ErrorField error={errors.city} />
                             </div>
 
                             <div className="space-y-2">
@@ -338,6 +346,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                     {/* Placeholder icon */}
                                     <Phone className="absolute left-3 top-3.5 text-slate-400" size={18} />
                                 </div>
+                                <ErrorField error={errors.phoneNumber} />
                             </div>
 
                             <div className="space-y-2 md:col-span-2">
@@ -361,6 +370,7 @@ export const Step1MerchantSignup: React.FC<Step1Props> = ({ onNext, data, update
                                         Pick Location
                                     </button>
                                 </div>
+                                <ErrorField error={errors.location} />
                             </div>
                         </div>
 
