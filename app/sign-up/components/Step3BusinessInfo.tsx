@@ -103,7 +103,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     <FileUploadInput
                                         value={data.brDocument}
                                         fileName={data.brDocumentName}
-                                        onFileSelect={(base64, fileName) => updateData({ brDocument: base64, brDocumentName: fileName })}
+                                        onFileSelect={(base64, fileName) => updateData({ brDocument: base64 as string, brDocumentName: fileName as string })}
                                     />
                                     <ErrorField error={errors.brDocument} />
                                 </div>
@@ -156,7 +156,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                 <FileUploadInput
                                     value={data.taxCertificate}
                                     fileName={data.taxCertificateName}
-                                    onFileSelect={(base64, fileName) => updateData({ taxCertificate: base64, taxCertificateName: fileName })}
+                                    onFileSelect={(base64, fileName) => updateData({ taxCertificate: base64 as string, taxCertificateName: fileName as string })}
                                 />
                                 <ErrorField error={errors.taxCertificate} />
                             </div>
@@ -168,7 +168,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                 <FileUploadInput
                                     value={data.tdlDocument}
                                     fileName={data.tdlDocumentName}
-                                    onFileSelect={(base64, fileName) => updateData({ tdlDocument: base64, tdlDocumentName: fileName })}
+                                    onFileSelect={(base64, fileName) => updateData({ tdlDocument: base64 as string, tdlDocumentName: fileName as string })}
                                 />
                                 <ErrorField error={errors.tdlDocument} />
                             </div>
@@ -228,7 +228,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     <FileUploadInput
                                         value={data.nicFront}
                                         fileName={data.nicFrontName}
-                                        onFileSelect={(base64, fileName) => updateData({ nicFront: base64, nicFrontName: fileName })}
+                                        onFileSelect={(base64, fileName) => updateData({ nicFront: base64 as string, nicFrontName: fileName as string })}
                                     />
                                     <ErrorField error={errors.nicFront} />
                                 </div>
@@ -239,7 +239,7 @@ export const Step3BusinessInfo: React.FC<Step3Props> = ({ onNext, onPrev, data, 
                                     <FileUploadInput
                                         value={data.nicBack}
                                         fileName={data.nicBackName}
-                                        onFileSelect={(base64, fileName) => updateData({ nicBack: base64, nicBackName: fileName })}
+                                        onFileSelect={(base64, fileName) => updateData({ nicBack: base64 as string, nicBackName: fileName as string })}
                                     />
                                     <ErrorField error={errors.nicBack} />
                                 </div>

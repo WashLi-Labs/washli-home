@@ -38,7 +38,14 @@ export default function PageLayout({
                 </div>
                 {showFooter && (
                     <footer className="relative z-10 py-6 text-center text-slate-600 text-sm border-t border-black/5 shrink-0">
-                        © 2026 WashLi. All rights reserved.
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6">
+                            <span>© 2026 WashLi. All rights reserved.</span>
+                            <div className="flex gap-4">
+                                <a href="/terms" className="hover:text-sky-600 transition-colors">Terms</a>
+                                <a href="/privacy" className="hover:text-sky-600 transition-colors">Privacy</a>
+                                <a href="/refund" className="hover:text-sky-600 transition-colors">Refund Policy</a>
+                            </div>
+                        </div>
                     </footer>
                 )}
             </div>

@@ -161,13 +161,20 @@ export const NavLinks: React.FC<NavLinksProps> = ({
             </nav>
 
             <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200">
-              <div className="flex items-center justify-center gap-2">
-                <div className="flex items-center justify-center w-5 h-5 bg-sky-500 text-white rounded text-xs font-bold">
-                  N
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="flex items-center justify-center w-5 h-5 bg-sky-500 text-white rounded text-xs font-bold">
+                    N
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    © 2026 WashLi. All rights reserved.
+                  </p>
                 </div>
-                <p className="text-sm text-gray-500">
-                  © 2026 WashLi. All rights reserved.
-                </p>
+                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-gray-400">
+                  <Link href="/terms" onClick={closeMenu} className="hover:text-sky-500 transition-colors">Terms</Link>
+                  <Link href="/privacy" onClick={closeMenu} className="hover:text-sky-500 transition-colors">Privacy</Link>
+                  <Link href="/refund" onClick={closeMenu} className="hover:text-sky-500 transition-colors">Refund Policy</Link>
+                </div>
               </div>
             </div>
           </div>

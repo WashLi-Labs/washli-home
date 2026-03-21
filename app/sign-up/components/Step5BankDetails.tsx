@@ -210,7 +210,7 @@ export const Step5BankDetails: React.FC<Step5Props> = ({ onNext, onPrev, data, u
                             <FileUploadInput
                                 value={data.bankStatement}
                                 fileName={data.bankStatementName}
-                                onFileSelect={(base64, fileName) => updateData({ bankStatement: base64, bankStatementName: fileName })}
+                                onFileSelect={(base64, fileName) => updateData({ bankStatement: base64 as string, bankStatementName: fileName as string })}
                             />
                             <ErrorField error={errors.bankStatement} />
                         </div>

@@ -17,13 +17,37 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
     const formatTime = (time: string) => time || "N/A";
     const formatBool = (val: boolean) => val ? "Yes" : "No";
 
-    const renderValue = (value: string | undefined | null, fileName?: string) => {
+    const renderValue = (value: string | string[] | undefined | null, fileName?: string | string[]) => {
         if (!value) return "N/A";
+
+        if (Array.isArray(value)) {
+            return (
+                <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {value.map((val, idx) => {
+                        const name = Array.isArray(fileName) ? fileName[idx] : fileName;
+                        if (val.startsWith("data:image")) {
+                            return (
+                                <div key={idx} className="space-y-1">
+                                    {name && <p className="text-[10px] text-slate-400 truncate max-w-full">{name}</p>}
+                                    <img
+                                        src={val}
+                                        alt={`Preview ${idx + 1}`}
+                                        className="h-24 w-full rounded-md border border-slate-200 shadow-sm object-cover"
+                                    />
+                                </div>
+                            );
+                        }
+                        return null;
+                    })}
+                </div>
+            );
+        }
+
         if (typeof value === 'string') {
             if (value.startsWith("data:image")) {
                 return (
                     <div className="mt-1 space-y-2">
-                        {fileName && <p className="text-xs text-slate-500 font-medium">{fileName}</p>}
+                        {fileName && typeof fileName === 'string' && <p className="text-xs text-slate-500 font-medium">{fileName}</p>}
                         <img
                             src={value}
                             alt="Preview"
@@ -36,10 +60,10 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                 return (
                     <div className="mt-1 flex items-center space-x-2 p-2 bg-slate-100 rounded border border-slate-200 w-fit">
                         <FileText size={20} className="text-slate-500" />
-                        <span className="text-slate-600 text-sm font-medium">{fileName || "Document"}</span>
+                        <span className="text-slate-600 text-sm font-medium">{(typeof fileName === 'string' ? fileName : null) || "Document"}</span>
                         <a
                             href={value}
-                            download={fileName || "document"}
+                            download={(typeof fileName === 'string' ? fileName : null) || "document"}
                             className="text-sky-600 text-xs font-medium hover:underline ml-2"
                         >
                             Download
@@ -48,8 +72,12 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
                 );
             }
         }
-        if (value.length > 50) return <span title={value} className="break-all">{fileName || (value.substring(0, 50) + "...")}</span>;
-        return <span className="break-all">{fileName || value}</span>;
+        
+        const displayValue = typeof value === 'string' ? value : "Multiple Files";
+        const displayName = typeof fileName === 'string' ? fileName : null;
+
+        if (displayValue.length > 50) return <span title={displayValue} className="break-all">{displayName || (displayValue.substring(0, 50) + "...")}</span>;
+        return <span className="break-all">{displayName || displayValue}</span>;
     };
 
     return (
@@ -319,8 +347,19 @@ export const Step6Summary: React.FC<Step6Props> = ({ onPrev, onSubmit, data, onG
 
             </div>
 
+            {/* Consent Message */}
+            <div className="pt-6 border-t border-slate-100 italic text-center">
+                <p className="text-sm text-slate-500">
+                    By clicking <span className="font-bold text-sky-600">Submit</span>, you agree to WashLi&apos;s{" "}
+                    <a href="/terms" target="_blank" className="font-semibold text-sky-500 hover:underline">Terms</a>,{" "}
+                    <a href="/privacy" target="_blank" className="font-semibold text-sky-500 hover:underline">Privacy Policy</a>,{" "}
+                    and{" "}
+                    <a href="/refund" target="_blank" className="font-semibold text-sky-500 hover:underline">Refund Policy</a>.
+                </p>
+            </div>
+
             {/* Footer Actions */}
-            <div className="flex justify-between items-center pt-8">
+            <div className="flex justify-between items-center pt-4">
                 <button
                     type="button"
                     onClick={onPrev}

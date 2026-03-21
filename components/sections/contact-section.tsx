@@ -154,6 +154,14 @@ export default function ContactSection() {
                     scrollTo={scrollTo}
                     className="md:hidden mt-4 shrink-0"
                 />
+
+                {/* Footer Links for Home Page (since global footer is hidden) */}
+                <div className="mt-auto pt-8 border-t border-black/5 flex flex-wrap justify-center gap-x-8 gap-y-2 text-xs md:text-sm text-neutral-500 shrink-0">
+                    <span>© 2026 WashLi. All rights reserved.</span>
+                    <a href="/terms" className="hover:text-sky-500 transition-colors">Terms</a>
+                    <a href="/privacy" className="hover:text-sky-500 transition-colors">Privacy</a>
+                    <a href="/refund" className="hover:text-sky-500 transition-colors">Refund Policy</a>
+                </div>
             </div>
         </div>
     );
