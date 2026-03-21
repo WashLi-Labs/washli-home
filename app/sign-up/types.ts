@@ -63,8 +63,8 @@ export interface SignUpFormData {
     outletLogo: string;
     outletLogoName: string;
     hasImages: "Yes" | "No"; // "Yes" | "No"
-    itemImages: string;
-    itemImagesName: string;
+    itemImages: string | string[];
+    itemImagesName: string | string[];
 
     // Step 5: Bank Details
     beneficiaryName: string;
@@ -133,8 +133,8 @@ export const initialFormData: SignUpFormData = {
     outletLogo: "",
     outletLogoName: "",
     hasImages: "No",
-    itemImages: "",
-    itemImagesName: "",
+    itemImages: [],
+    itemImagesName: [],
 
     // Step 5
     beneficiaryName: "",

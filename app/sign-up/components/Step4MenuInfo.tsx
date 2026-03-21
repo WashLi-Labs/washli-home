@@ -46,7 +46,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         <FileUploadInput
                             value={data.menuDocument}
                             fileName={data.menuDocumentName}
-                            onFileSelect={(base64, fileName) => updateData({ menuDocument: base64, menuDocumentName: fileName })}
+                            onFileSelect={(base64, fileName) => updateData({ menuDocument: base64 as string, menuDocumentName: fileName as string })}
                         />
                         <ErrorField error={errors.menuDocument} />
                     </div>
@@ -58,7 +58,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                         <FileUploadInput
                             value={data.outletLogo}
                             fileName={data.outletLogoName}
-                            onFileSelect={(base64, fileName) => updateData({ outletLogo: base64, outletLogoName: fileName })}
+                            onFileSelect={(base64, fileName) => updateData({ outletLogo: base64 as string, outletLogoName: fileName as string })}
                         />
                         <ErrorField error={errors.outletLogo} />
                     </div>
@@ -94,6 +94,7 @@ export const Step4MenuInfo: React.FC<Step4Props> = ({ onNext, onPrev, data, upda
                                     value={data.itemImages}
                                     fileName={data.itemImagesName}
                                     onFileSelect={(base64, fileName) => updateData({ itemImages: base64, itemImagesName: fileName })}
+                                    multiple={true}
                                 />
                                 <ErrorField error={errors.itemImages} />
                             </div>
